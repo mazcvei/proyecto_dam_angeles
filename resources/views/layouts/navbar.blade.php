@@ -29,7 +29,10 @@
                         <li class="nav-item">
                             <a class="btn btn-outline-light ms-2" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                         </li>
-                    @else
+                    @else   
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.index') }}">Listar usuarios</a>
+                        </li>
                        
                       
                         <li class="nav-item dropdown">

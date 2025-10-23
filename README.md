@@ -13,7 +13,8 @@
 2-  Create Database 'ilustraevento_bd' and set DB_DATABASE into .env
 3-  composer install
 4-  php artisan migrate
-5-  
+5-  php artisan db:seed
+6-  php artisan storage:link
 
 
 ## Ejemplos de uso

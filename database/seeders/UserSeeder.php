@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'name' => 'Usuario admin',
             'email' => 'admin@admin.com',
+            'rol_id' => 1,
             'password' => Hash::make("password")
         ]);
 
@@ -24,6 +25,7 @@ class UserSeeder extends Seeder
             User::create([
                 "name"=> "user_$user_n",
                 "email"=> "user_$user_n@user.com",
+                 'rol_id' => 2,
                 "password" => Hash::make("password")
             ]);
         }
