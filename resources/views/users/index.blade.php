@@ -4,7 +4,12 @@
 
 
 <div class="container">
-    <div class="row">
+    <div class="row mt-4">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="col-12">
             <h1>Usuarios</h1>
         </div>
@@ -23,7 +28,7 @@
                 <tbody>
                     @foreach($users as $user)
                     <tr>
-                        <th scope="row">{{$user->id}}</th>
+                        <td>{{$user->id}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->rol->rol}}</td>

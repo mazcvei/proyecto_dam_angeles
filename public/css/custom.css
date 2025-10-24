@@ -1,0 +1,47 @@
+:root{
+    --color-principal: #96D9F8;
+    --color-secundario: #96A8F8;
+    --color-axuliar: #B596F8;
+    --color-error: #F598A1;
+    --color-axuliar-hover: #d7c6fd;
+    --color-blanco: #fff;
+}
+nav{
+    background-color: var(--color-secundario);
+    font-weight: bold;
+}
+.nav-link{
+    color: var(--color-blanco);
+}
+h1{
+    text-align: center;
+}
+th,td{
+    text-align: center;
+}
+.alert{
+    text-align: center;
+    font-weight: bold;
+}
+.btn-edit,.btn-create{
+    background-color: var(--color-principal);
+}
+.btn-delete{
+     background-color: var(--color-error);
+}
+.btn-submit{
+      background-color: var(--color-axuliar);
+      color: var(--color-blanco);
+      font-weight: 600;
+}
+.btn-submit:hover{
+     background-color: var(--color-axuliar-hover);
+     color: var(--color-blanco);
+}
+li{
+    text-decoration: none;
+    list-style: none;
+}
+ul{
+    margin-bottom: 0rem;
+}

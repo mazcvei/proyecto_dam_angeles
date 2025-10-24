@@ -24,7 +24,8 @@ class RolController extends Controller
      */
     public function create()
     {
-        
+        dd("Creando rol");
+
     }
 
     /**
@@ -32,7 +33,20 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        $rol =  $request->rol;
+        $request->validate([
+           "rol" => "required|max:255|min:3"
+        ],[
+           "rol.required" => "El campo rol es obligatorio", 
+           "rol.max" => "El campo rol debe tener maximo 255 caracteres", 
+           "rol.min" => "El campo rol debe tener mínimo 3 caracteres", 
+        ]);
+        // dd($request->all());
+        Rol::create([
+            "rol" => $request->rol
+        ]);
+         return redirect()
+            ->route('rol.index')
+            ->with("success", "Rol creado correctamente");
     }
 
     /**
@@ -46,30 +60,47 @@ class RolController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id = null)
     {
-        
+        if ($id) {
+            $rol = Rol::find($id);
+            if ($rol) {
+                return view('roles.create_edit', compact('rol'));
+            } else {
+                abort(404);
+            }
+        } else {
+            return view('roles.create_edit');
+        }
+
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $rol = Rol::find($request->id);
+        $rol->rol = $request->rol;
+        $rol->save();
+        return redirect()
+        ->route('rol.index')
+        ->with("success", "Rol actualizado correctamente");
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-          $rol = Rol::find($id);
-          if($rol){
+        $rol = Rol::find($id);
+        if ($rol) {
             $rol->delete();
-          }else{
-
-          }
+             return redirect()
+                ->route('rol.index')
+                ->with("success", "Rol eliminado correctamente");
+        } else {
+            abort(404);
+        }
 
     }
 }

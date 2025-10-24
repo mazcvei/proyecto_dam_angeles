@@ -21,8 +21,12 @@ Route::middleware('auth')->group(function () {
     //Users 
     Route::get('/usuarios', [UserController::class, 'index'])->name('user.index');
 
-     //Roles 
+    //Roles 
     Route::get('/roles', [RolController::class, 'index'])->name('rol.index');
+    Route::get('/crear-editar-rol/{id?}', [RolController::class, 'edit'])->name('rol.create.edit');
+    Route::post('/rol-actualizar', [RolController::class, 'update'])->name(name: 'rol.update');
+    Route::post('/rol-crear', [RolController::class, 'store'])->name('rol.store');
+    Route::get('/rol-eliminar/{id}', [RolController::class, 'destroy'])->name('rol.delete');
 });
 
 require __DIR__.'/auth.php';
