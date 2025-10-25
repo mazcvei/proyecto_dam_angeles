@@ -30,6 +30,7 @@
                             <a class="btn btn-outline-light ms-2" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                         </li>
                     @else   
+                        @if(UsersHelper::checkAdmin(Auth::id()))
                          <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.index') }}">Listar usuarios</a>
                         </li>
@@ -37,7 +38,7 @@
                          <li class="nav-item">
                             <a class="nav-link" href="{{ route('rol.index') }}">Listar roles</a>
                         </li>
-                       
+                        @endif
                       
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle text-black" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -45,7 +46,7 @@
                             </a>
 
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item"  href="#">{{ __('Perfil') }}</a></li>
+                                <li><a class="dropdown-item"  href="{{route('user.show')}}">{{ __('Perfil') }}</a></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf

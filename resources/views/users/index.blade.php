@@ -27,6 +27,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Email</th>
                         <th scope="col">Rol</th>
+                        <th scope="col">Fecha de registro</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -37,6 +38,7 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->rol->rol}}</td>
+                        <td>{{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i:s')}}</td>
                         <td>
                             <a class="btn btn-edit" href="{{ route('user.create.edit',$user->id) }}">
                                 <i class="fa-solid fa-pen-to-square"></i>
@@ -50,6 +52,9 @@
                    
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center mb-4" >
+                {{ $users->links() }}
+            </div>
         </div>
     </div>
 </div>

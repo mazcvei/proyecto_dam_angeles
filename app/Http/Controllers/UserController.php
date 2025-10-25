@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Rol;
 
@@ -15,17 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('created_at', 'desc')->paginate(20);
         //dd($users);
         return view('users.index',compact('users'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        
     }
 
     /**
@@ -34,10 +27,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'rol_id' => 'required|exists:roles,id',
+            'rol_id' => 'exists:roles,id',
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:6|confirmed',
         ]);
 
         User::create([
@@ -55,9 +48,11 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        dd(User::find($id));
+        $user = Auth::user();
+        $roles = Rol::all();
+        return view('users.show', compact ('user','roles'));
     }
 
     /**
@@ -68,7 +63,7 @@ class UserController extends Controller
         $roles = Rol::all();
         if ($id) {
             $user = User::find($id);
-            if ($user) {
+            if ($user){
                 return view('users.create_edit', compact('user', 'roles'));
             } else {
                 abort(404);
@@ -82,6 +77,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+        $user = User::find($request->id);
         $request->validate([
             'rol_id' => 'required|exists:roles,id',
             'name' => 'required|max:250',
@@ -89,7 +85,6 @@ class UserController extends Controller
             'password' => 'nullable|min:6|confirmed',
         ]);
 
-        $user = User::find($request->id);
         $user->name = $request->name;
         $user->email = $request->email;
 
