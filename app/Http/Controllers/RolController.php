@@ -95,7 +95,7 @@ class RolController extends Controller
         $rol = Rol::find($id);
         if ($rol) {
             $rol->delete();
-             return redirect()
+            return redirect()
                 ->route('rol.index')
                 ->with("success", "Rol eliminado correctamente");
         } else {

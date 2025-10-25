@@ -13,6 +13,11 @@
         <div class="col-12">
             <h1>Usuarios</h1>
         </div>
+        <div class="col-12 col-md-12" style="text-align:center">
+             <a class="btn btn-edit" href="{{ route('user.create.edit') }}">
+                                Nuevo Usuario
+             </a>
+        </div>
         <div class="col-12">
             <table class="table caption-top">
                 <caption>Usuarios</caption>
@@ -33,7 +38,12 @@
                         <td>{{$user->email}}</td>
                         <td>{{$user->rol->rol}}</td>
                         <td>
-                            
+                            <a class="btn btn-edit" href="{{ route('user.create.edit',$user->id) }}">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <a class="btn btn-delete" onclick="return confirm('¿Quieres borrar este usuario?')" href="{{ route('user.delete',$user->id) }}">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
                         </td>
                     </tr>
                    @endforeach

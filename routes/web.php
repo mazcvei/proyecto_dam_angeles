@@ -20,6 +20,10 @@ Route::middleware('auth')->group(function () {
 
     //Users 
     Route::get('/usuarios', [UserController::class, 'index'])->name('user.index');
+    Route::get('/crear-editar-usuarios/{id?}', [UserController::class, 'edit'])->name('user.create.edit');
+    Route::post('/usuarios-actualizar', [UserController::class, 'update'])->name(name: 'user.update');
+    Route::post('/usuarios-crear', [UserController::class, 'store'])->name('user.store');
+    Route::get('/usuarios-eliminar/{id}', [UserController::class, 'destroy'])->name('user.delete');
 
     //Roles 
     Route::get('/roles', [RolController::class, 'index'])->name('rol.index');
