@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RolEnum;
 use App\Models\Rol;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,7 +15,7 @@ class RolSeeder extends Seeder
     public function run(): void
     {
         Rol::truncate();
-        $roles = ["Admin", "Customer"];
+        $roles = [RolEnum::ADMINISTRADOR->name, RolEnum::CLIENTE->name];
         foreach($roles as $rol){
             Rol::create([
                 "rol" => $rol

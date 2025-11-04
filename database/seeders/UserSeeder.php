@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use App\Enums\RolEnum;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,7 +18,7 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'name' => 'Usuario admin',
             'email' => 'admin@admin.com',
-            'rol_id' => 1,
+            'rol_id' => RolEnum::ADMINISTRADOR->value,
             'password' => Hash::make("password")
         ]);
 

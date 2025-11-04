@@ -1,7 +1,3 @@
-@php
-    use App\Http\Helpers\UsersHelper;
-@endphp
-
 {{-- Navbar --}}
     <nav class="navbar navbar-expand-lg shadow-sm">
         <div class="container">
@@ -34,7 +30,7 @@
                             <a class="btn btn-outline-light ms-2" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                         </li>
                     @else   
-                        @if(UsersHelper::checkAdmin(Auth::id()))
+                        @if(\App\Http\Helpers\UsersHelper::checkAdmin())
                          <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.index') }}">Listar usuarios</a>
                         </li>

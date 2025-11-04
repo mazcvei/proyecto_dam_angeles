@@ -7,6 +7,9 @@ use App\Http\Controllers\RolController;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('/test', function () {
+    return view('orders.create');
+});
 Route::get('/', [HomeController::class,'index'])->name( 'home');
 
 Route::get('/dashboard', function () {
