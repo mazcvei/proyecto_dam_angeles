@@ -1,3 +1,7 @@
+@php
+    use App\Http\Helpers\UsersHelper;
+@endphp
+
 {{-- Navbar --}}
     <nav class="navbar navbar-expand-lg shadow-sm">
         <div class="container">
