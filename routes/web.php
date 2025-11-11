@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 
 
 Route::get('/test', function () {
@@ -40,9 +41,15 @@ Route::middleware('auth')->group(function () {
         Route::post('/rol-crear', [RolController::class, 'store'])->name('rol.store');
         Route::get('/rol-eliminar/{id}', [RolController::class, 'destroy'])->name('rol.delete');
 
-    });
+        // Orders
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/crear-editar-orders/{id?}', [OrderController::class, 'edit'])->name('orders.create.edit');
+        Route::post('/orders-actualizar', [OrderController::class, 'update'])->name('orders.update');
+        Route::post('/orders-crear', [OrderController::class, 'store'])->name('orders.store');
+        Route::get('/orders-eliminar/{id}', [OrderController::class, 'destroy'])->name('orders.delete');
 
-   
+
+    });
 });
 
 require __DIR__.'/auth.php';
