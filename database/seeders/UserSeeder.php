@@ -5,8 +5,10 @@ use App\Enums\RolEnum;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Hash;
+use \Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash as FacadesHash;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -14,7 +16,9 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::statement("SET FOREIGN_KEY_CHECKS=0");
         User::truncate();
+        DB::statement("SET FOREIGN_KEY_CHECKS=1");
         User::factory()->create([
             'name' => 'Usuario admin',
             'email' => 'admin@admin.com',

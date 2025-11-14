@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('paper_sizes', function (Blueprint $table) {
             $table->id();
+            $table->string('size')->unique();
             $table->timestamps();
-            $table->string('paper_type');
-            $table->string('size');
-            $table->string('illustration_type');
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('paper_sizes');
     }
 };

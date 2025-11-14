@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class IllustrationType extends Model
 {
-    protected $table = "illustration_type";
-    protected $fillable = ["tipo"];
+    protected $table = "illustration_types";
+    protected $fillable = ["type","price"];
 }

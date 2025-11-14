@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('illustration_type', function (Blueprint $table) {
+        Schema::create('illustration_types', function (Blueprint $table) {
             $table->id();
-            $table->string("tipo")->unique();
+            $table->string("type")->unique();
+            $table->decimal("price",8,2)->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('illustration_type');
+        Schema::dropIfExists('illustration_types');
     }
 };
