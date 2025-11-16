@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 
 
-Route::get('/test2', function () {
-   // dd(StateEnum::cases());
+Route::get('/test', function () {
+   dd(StateEnum::cases());
     return view('dashboard');
 });
 Route::get('/', [HomeController::class,'index'])->name( 'home');

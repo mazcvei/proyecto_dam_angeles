@@ -17,5 +17,11 @@ class PaperTypeSeeder extends Seeder
         DB::statement("SET FOREIGN_KEY_CHECKS=0");
         PaperType::truncate();
         DB::statement("SET FOREIGN_KEY_CHECKS=1");
+        $types = [PaperTypeEnum::FOTOGRAFICO->name, PaperTypeEnum::CARTULINA->name];
+        foreach($types as $type){
+            PaperType::create([
+                "type" => $type
+            ]);
+        }
     }
 }

@@ -22,6 +22,13 @@ class OrderStateSeeder extends Seeder
             Rol::create([
                 "rol" => $rol
             ]);
+
+        /*$states = [StateEnum::PREPARACION->name, StateEnum::ENVIADO->name, StateEnum::PAGADO->name, 
+                    StateEnum::ENTREGADO->name, StateEnum::PREPARACION->name, StateEnum::PENDIENTE_PAGO->name, StateEnum::CANCELADO->name,];
+        foreach($states as $state){
+            OrderState::create([
+                "state" => $state
+            ]);*/
         }
     }
 }
