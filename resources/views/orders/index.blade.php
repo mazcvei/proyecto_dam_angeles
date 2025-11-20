@@ -22,7 +22,6 @@
             <table class="table caption-top">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">ID</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Tipo de papel</th>
