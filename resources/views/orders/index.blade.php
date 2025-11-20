@@ -37,11 +37,11 @@
                     <tr>
                         <td>{{$order->id}}</td>
                         <td>{{$order->date}}</td>
-                        <td>{{$order->paper_type_id}}</td>
-                        <td>{{$order->paper_size_id}}</td>
-                        <td>{{$order->illustration_type_id}}</td>
+                        <td>{{$order->PaperType->type}}</td>
+                        <td>{{$order->PaperSize->size}}</td>
+                        <td>{{$order->IllustrationType->type}}</td>
                         <td>{{$order->num_photos}}</td>
-                        <td>{{$order->order_state_id}}</td>
+                        <td>{{$order->OrderState->state}}</td>
                         <td>
                             <a class="btn btn-edit" href="{{ route('orders.create.edit',$order->id) }}">
                                 <i class="fa-solid fa-pen-to-square"></i>
