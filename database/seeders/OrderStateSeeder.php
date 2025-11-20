@@ -25,6 +25,13 @@ class OrderStateSeeder extends Seeder
             OrderState::create([
                 "state" => $state
             ]);
+
+        /*$states = [StateEnum::PREPARACION->name, StateEnum::ENVIADO->name, StateEnum::PAGADO->name, 
+                    StateEnum::ENTREGADO->name, StateEnum::PREPARACION->name, StateEnum::PENDIENTE_PAGO->name, StateEnum::CANCELADO->name,];
+        foreach($states as $state){
+            OrderState::create([
+                "state" => $state
+            ]);*/
         }
     }
 }
