@@ -7,11 +7,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
+use App\Models\illustrationType;
 
-
-Route::get('/test2', function () {
-   // dd(StateEnum::cases());
-    return view('dashboard');
+Route::get('/test', function () {
+    dd(IllustrationType::inRandomOrder()->first()->id);
+   $illustrationType = IllustrationType::inRandomOrder()->first()->id;
+    return  $illustrationType;
 });
 Route::get('/', [HomeController::class,'index'])->name( 'home');
 

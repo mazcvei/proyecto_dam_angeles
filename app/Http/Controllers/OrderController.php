@@ -12,7 +12,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::orderBy("date","desc")->get();
+        return view('orders.index',compact('orders'));
     }
 
     /**
