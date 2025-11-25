@@ -19,7 +19,7 @@
              </a>
         </div>
         <div class="col-12">
-            <table class="table caption-top">
+            <table class="table caption-top" id="tablaUsuarios">
                 <caption>Usuarios</caption>
                 <thead>
                     <tr>
@@ -59,4 +59,20 @@
     </div>
 </div>
 
+@endsection
+@section('script')
+    <script>
+         
+             new DataTable('#tablaUsuarios', {
+                language: {
+                    info: 'Mostrando página _PAGE_ de _PAGES_',
+                    infoEmpty: 'No hay elementos disponibles',
+                    infoFiltered: '(filtrado de _MAX_ total registros)',
+                    lengthMenu: 'Mostrar _MENU_ registros por página',
+                    zeroRecords: 'No hay registros',
+                    search: 'Buscar'
+                },
+                paging: false
+            });
+    </script>
 @endsection

@@ -22,8 +22,8 @@ class OrderSeeder extends Seeder
         DB::statement("SET FOREIGN_KEY_CHECKS=0");
         Order::truncate();
         DB::statement("SET FOREIGN_KEY_CHECKS=1");
-        foreach(range(1,10) as  $orderNum){
-            $User =User::inRandomOrder()->first();
+        foreach(range(1,100) as  $orderNum){
+            $User = User::inRandomOrder()->first();
             $IllustrationType = IllustrationType::inRandomOrder()->first();
             $OrderState = OrderState::inRandomOrder()->first();
             $PaperSize = PaperSize::inRandomOrder()->first();

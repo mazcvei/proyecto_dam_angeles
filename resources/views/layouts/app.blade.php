@@ -6,5 +6,9 @@
     <body class="font-sans antialiased">
         @include('layouts.navbar')
         @yield('content')
+        @include('layouts.scripts')
+        @yield('script')
+
     </body>
+
 </html>

@@ -11,15 +11,15 @@
         @endif
 
         <div class="col-12">
-            <h1>Roles</h1>
+            <h1>Pedidos</h1>
         </div>
         <div class="col-12 col-md-12" style="text-align:center">
-             <a class="btn btn-edit" href="{{ route('rol.create.edit') }}">
+             <a class="btn btn-edit" href="{{ route('create.order') }}">
                                 Nuevo Pedido
              </a>
         </div>
         <div class="col-12 col-md-12 m-auto">
-            <table class="table caption-top">
+            <table class="table caption-top" id="tablaPedidos">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -43,7 +43,7 @@
                         <td>{{$order->num_photos}}</td>
                         <td>{{$order->OrderState->state}}</td>
                         <td>
-                            <a class="btn btn-edit" href="{{ route('orders.create.edit',$order->id) }}">
+                            <a class="btn btn-edit" href="#">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                             <a class="btn btn-delete" onclick="return confirm('¿Quieres borrar este pedido?')" href="{{ route('orders.delete',$order->id) }}">
@@ -59,4 +59,19 @@
     </div>
 </div>
 
+@endsection
+@section('script')
+    <script>
+            new DataTable('#tablaPedidos', {
+                language: {
+                    info: 'Mostrando página _PAGE_ de _PAGES_',
+                    infoEmpty: 'No hay elementos disponibles',
+                    infoFiltered: '(filtrado de _MAX_ total registros)',
+                    lengthMenu: 'Mostrar _MENU_ registros por página',
+                    zeroRecords: 'No hay registros',
+                    search: 'Buscar'
+                },
+                paging: false
+            });
+    </script>
 @endsection

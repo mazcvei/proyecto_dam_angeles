@@ -28,6 +28,11 @@ Route::middleware('auth')->group(function () {
     //Profile
     Route::get('/perfil', [UserController::class, 'show'])->name('user.show');
 
+    //Orders
+    Route::get('/mis-pedidos', [OrderController::class, 'myOrders'])->name('my.orders');
+    Route::get('/nuevo-pedido', [OrderController::class, 'create'])->name('create.order');
+    Route::post('/pedidos-crear', [OrderController::class, 'store'])->name('orders.store');
+
 
     //Users 
     Route::middleware('admin')->group(function () {
@@ -45,11 +50,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/rol-eliminar/{id}', [RolController::class, 'destroy'])->name('rol.delete');
 
         // Orders
-        Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-        Route::get('/crear-editar-orders/{id?}', [OrderController::class, 'edit'])->name('orders.create.edit');
-        Route::post('/orders-actualizar', [OrderController::class, 'update'])->name('orders.update');
-        Route::post('/orders-crear', [OrderController::class, 'store'])->name('orders.store');
-        Route::get('/orders-eliminar/{id}', [OrderController::class, 'destroy'])->name('orders.delete');
+        Route::get('/pedidos', [OrderController::class, 'index'])->name('orders.index');
+        Route::post('/pedidos-actualizar', [OrderController::class, 'update'])->name('orders.update');
+        Route::get('/pedidos-eliminar/{id}', [OrderController::class, 'destroy'])->name('orders.delete');
+       
 
 
     });
