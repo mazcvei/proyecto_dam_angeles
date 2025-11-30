@@ -31,7 +31,33 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+        $request->validate([
+        'paper_type_id'        => 'required|exists:paper_types,id',
+        'paper_size_id'        => 'required|exists:paper_sizes,id',
+        'illustration_type_id' => 'required|exists:illustration_types,id',
+        'num_photos'           => 'required|integer|min:1'
+    ], [
+        'paper_type_id.required' => 'Debe seleccionar un tipo de papel.',
+        'paper_size_id.required' => 'Debe seleccionar un tamaño de papel.',
+        'illustration_type_id.required' => 'Debe seleccionar un tipo de ilustración.',
+        'num_photos.required' => 'Debe ingresar la cantidad de fotos.',
+        'num_photos.min' => 'Debe haber al menos 1 foto.',
+    ]);
+
+    Order::create([
+        'user_id'              => Auth::id(),        
+        'date'                 => now(),             
+        'paper_type_id'        => $request->paper_type_id,
+        'paper_size_id'        => $request->paper_size_id,
+        'illustration_type_id' => $request->illustration_type_id,
+        'order_state_id'       => 1,                 
+        'num_photos'           => $request->num_photos,
+    ]);
+
+    return redirect()
+        ->route('orders.index')
+        ->with('success', 'Pedido creado correctamente');
     }
 
     /**

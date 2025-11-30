@@ -14,7 +14,8 @@ class Order extends Model
         'paper_type_id',
         'paper_size_id',
         'illustration_type_id',
-        'order_state_id'
+        'order_state_id',
+        'num_photos',
     ];
 
     public function PaperSize()
