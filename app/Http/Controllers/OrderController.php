@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\IllustrationType;
 use App\Models\Order;
-
+use App\Models\OrderImages;
+use App\Models\PaperSize;
+use App\Models\PaperType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +17,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy("date","desc")->get();
+        $orders = Order::orderBy("date","DESC")->get();
         return view('orders.index',compact('orders'));
     }
 
@@ -23,7 +26,10 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('orders.create');
+        $paperTypes = PaperType::all();
+        $paperSizes = PaperSize::all();
+        $ilustrationTypes = IllustrationType::all();
+        return view('orders.create',compact('paperTypes','paperSizes','ilustrationTypes'));
     }
 
     /**
@@ -31,29 +37,43 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+       //dd($request->all());
         $request->validate([
-        'paper_type_id'        => 'required|exists:paper_types,id',
-        'paper_size_id'        => 'required|exists:paper_sizes,id',
-        'illustration_type_id' => 'required|exists:illustration_types,id',
-        'num_photos'           => 'required|integer|min:1'
-    ], [
-        'paper_type_id.required' => 'Debe seleccionar un tipo de papel.',
-        'paper_size_id.required' => 'Debe seleccionar un tamaño de papel.',
-        'illustration_type_id.required' => 'Debe seleccionar un tipo de ilustración.',
-        'num_photos.required' => 'Debe ingresar la cantidad de fotos.',
-        'num_photos.min' => 'Debe haber al menos 1 foto.',
+        'paper_type'        => 'required|exists:paper_types,id',
+        'size'              => 'required|exists:paper_sizes,id',
+        'illustration_type' => 'required|exists:illustration_types,id',
+        'images'            => 'required|array',      
+        'images.*'          => 'required|mimes:jpeg,jpg,png|max:6250'
+    ],  [
+        'paper_type.required'   => 'Debe seleccionar un tipo de papel.',
+        'size.required'         => 'Debe seleccionar un tamaño de papel.',
+        'illustration_type.required' => 'Debe seleccionar un tipo de ilustración.',
+        'images.required'       => 'Debe añadir alguna imagen.',
+        'images.array'       => 'Debe añadir alguna imagen.',
+        'images.*.max'            => 'Debe tener como máximo 6mb.',
+        'images.*.mimes'            => 'Extensión no válida.',
+        'paper_type.exists'     => 'Tipo de papel no válido',
+        'size.exists'           => 'Tamaño de papel no válido',
+        'illustration_type.exists'   => 'Tipo de ilustración no válida',
     ]);
 
-    Order::create([
+    $order = Order::create([
         'user_id'              => Auth::id(),        
         'date'                 => now(),             
-        'paper_type_id'        => $request->paper_type_id,
-        'paper_size_id'        => $request->paper_size_id,
-        'illustration_type_id' => $request->illustration_type_id,
+        'paper_type_id'        => $request->paper_type,
+        'paper_size_id'        => $request->size,
+        'illustration_type_id' => $request->illustration_type,
         'order_state_id'       => 1,                 
-        'num_photos'           => $request->num_photos,
+        'num_photos'           => count($request->images),
     ]);
+
+    foreach($request->file('images') as $image){
+        $path = $image->store('order_images','public');
+        OrderImages::create([
+            'order_id'              =>  $order->id,        
+            'image_path'            =>  $path,             
+        ]);
+    }
 
     return redirect()
         ->route('orders.index')

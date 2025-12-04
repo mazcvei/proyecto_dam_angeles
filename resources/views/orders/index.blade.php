@@ -29,6 +29,7 @@
                         <th scope="col">Tipo de ilustracion</th>
                         <th scope="col">Número de fotos</th>
                         <th scope="col">Estado del pedido</th>
+                        <th scope="col">Imagenes</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -42,6 +43,11 @@
                         <td>{{$order->IllustrationType->type}}</td>
                         <td>{{$order->num_photos}}</td>
                         <td>{{$order->OrderState->state}}</td>
+                        <td>
+                            @if(count($order->OrderImages)>0)
+                                <img width="120" src="{{  asset('storage/'. $order->OrderImages[0]->image_path ) }}">
+                            @endif
+                        </td>
                         <td>
                             <a class="btn btn-edit" href="#">
                                 <i class="fa-solid fa-pen-to-square"></i>

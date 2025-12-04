@@ -37,4 +37,9 @@ class Order extends Model
     {
         return $this->belongsTo(OrderState::class);
     }
+
+     public function OrderImages()
+    {
+        return $this->hasMany(OrderImages::class);
+    }
 }

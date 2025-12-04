@@ -165,10 +165,20 @@
 
 @endsection
 @section('content')
-<form id="pedidoForm" method="post" action="{{ route('orders.store') }}">
- @csrf
+
 <div class="container">
+    <form id="pedidoForm" enctype="multipart/form-data" method="post" action="{{ route('orders.store') }}">
+        @csrf
         <div class="row align-items-center">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
 
             <!-- COLUMNA IZQUIERDA -->
             <div class="col-lg-6 mb-4 mb-lg-0 mt-4">
@@ -176,7 +186,7 @@
                 <!-- CARRUSEL -->
                 <div id="carrusel_imagenes" class="mx-auto text-center mb-4">
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-Ainner" id="carrusel_inner_container"></div>
+                        <div class="carousel-inner" id="carrusel_inner_container"></div>
 
                         <button class="carousel-control-prev" type="button"
                             data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -206,6 +216,7 @@
 
             <!-- COLUMNA DERECHA -->
             <div class="col-lg-6">
+
                 <div class="ps-lg-6 ps-xl-10 w-lg-90">
 
                     <div class="mb-4">
@@ -223,7 +234,7 @@
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link" data-bs-toggle="collapse"
+                                    <button type="button" class="btn btn-link" data-bs-toggle="collapse"
                                         data-bs-target="#collapseOne" aria-expanded="true"
                                         aria-controls="collapseOne">
                                         Tipo de papel
@@ -234,22 +245,15 @@
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                 data-bs-parent="#accordion">
                                 <div class="card-body position-relative">
-
+                                    @foreach($paperTypes as $type)
                                     <div class="form-check mb-2">
                                         <input class="form-check-input" type="radio" name="paper_type"
-                                            id="papel_fotografico" value="Fotográfico">
-                                        <label class="form-check-label" for="papel_fotografico">
-                                            Fotográfico
+                                            id="papel_fotografico_{{ $type->id }}" value="{{ $type->id }}">
+                                        <label class="form-check-label" for="papel_fotografico_{{ $type->id }}">
+                                            {{$type->type}}
                                         </label>
                                     </div>
-
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="paper_type"
-                                            id="papel_cartulina" value="Cartulina">
-                                        <label class="form-check-label" for="papel_cartulina">
-                                            Cartulina
-                                        </label>
-                                    </div>
+                                    @endforeach
 
                                 </div>
                             </div>
@@ -259,7 +263,7 @@
                         <div class="card">
                             <div class="card-header" id="headingTwo">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-bs-toggle="collapse"
+                                    <button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse"
                                         data-bs-target="#collapseTwo" aria-expanded="false"
                                         aria-controls="collapseTwo">
                                         Tamaño de la ilustración
@@ -270,22 +274,15 @@
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                 data-bs-parent="#accordion">
                                 <div class="card-body position-relative">
-
+                                    @foreach($paperSizes as $paperSize)
                                     <div class="form-check mb-2">
                                         <input class="form-check-input" type="radio" name="size"
-                                            id="tamano_a5" value="A5 (14.8 x 21 cm)">
-                                        <label class="form-check-label" for="tamano_a5">
-                                            A5 (14.8 × 21 cm)
+                                            id="tamano_{{ $paperSize->id }}" value="{{ $paperSize->id }}">
+                                        <label class="form-check-label" for="tamano_{{  $paperSize->id }}">
+                                            {{ $paperSize->size }}
                                         </label>
                                     </div>
-
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="size"
-                                            id="tamano_10x15" value="10x15 cm">
-                                        <label class="form-check-label" for="tamano_10x15">
-                                            10 × 15 cm
-                                        </label>
-                                    </div>
+                                    @endforeach
 
                                 </div>
                             </div>
@@ -295,7 +292,7 @@
                         <div class="card">
                             <div class="card-header" id="headingThree">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-bs-toggle="collapse"
+                                    <button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse"
                                         data-bs-target="#collapseThree" aria-expanded="false"
                                         aria-controls="collapseThree">
                                         Tipo de ilustración
@@ -306,22 +303,16 @@
                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                                 data-bs-parent="#accordion">
                                 <div class="card-body position-relative">
-
+                                    @foreach($ilustrationTypes as $ilustrationType)
                                     <div class="form-check mb-2">
                                         <input class="form-check-input" type="radio" name="illustration_type"
-                                            id="ilustracion_realismo" value="Realismo">
-                                        <label class="form-check-label" for="ilustracion_realismo">
-                                            Realismo
+                                            id="tipo_ilustracion_{{ $ilustrationType->id }}" value="{{ $ilustrationType->id }}">
+                                        <label class="form-check-label" for="tipo_ilustracion_{{ $ilustrationType->id }}">
+                                            {{ $ilustrationType->type }}
                                         </label>
                                     </div>
+                                    @endforeach
 
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="illustration_type"
-                                            id="ilustracion_acuarela" value="Acuarela">
-                                        <label class="form-check-label" for="ilustracion_acuarela">
-                                            Acuarela
-                                        </label>
-                                    </div>
 
                                     <!-- BOTÓN ENVIAR -->
                                     <div class="text-center mt-4">
@@ -336,20 +327,21 @@
 
                     </div> <!-- FIN ACORDEÓN -->
                 </div>
+
             </div> <!-- FIN COLUMNA DERECHA -->
+
+
 
         </div> <!-- FIN ROW -->
 
-   
+    </form>
 </div>
- </form>
+
 
 
 <script>
     const btn_order = document.getElementById('btn_order');
-    btn_order.addEventListener('click',()=>{
-        console.log('click enviar pedido');
-    })
+
     const carrusel_imagenes = document.getElementById('carrusel_imagenes');
     const carrusel_inner_container = document.getElementById('carrusel_inner_container');
     const file_allow = ["image/jpeg", "image/jpg", "image/png"];
