@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('paper_type_id');
             $table->unsignedBigInteger('paper_size_id');
             $table->unsignedBigInteger('illustration_type_id');
-            $table->unsignedBigInteger('order_state_id');
+            $table->unsignedBigInteger('state_id');
             $table->integer('num_photos')->default(1);
             $table->timestamps();
             $table->foreign('user_id')

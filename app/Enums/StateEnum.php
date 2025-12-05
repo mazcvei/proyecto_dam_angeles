@@ -4,10 +4,10 @@ namespace App\Enums;
 
 enum StateEnum: string
 {
-    case PREPARACION = "PREPARACION";
+    case PREPARACION = "PREPARACIÓN";
     case ENVIADO = "ENVIADO";
     case PAGADO = "PAGADO";
     case ENTREGADO = "ENTREGADO";
-    case PENDIENTE_PAGO = "PENDIENTE_PAGO";
+    case PENDIENTE_PAGO = "PENDIENTE DE PAGO";
     case CANCELADO = "CANCELADO";
 }

@@ -18,10 +18,11 @@ class IllustrationTypeSeeder extends Seeder
         DB::statement("SET FOREIGN_KEY_CHECKS=0");
         IllustrationType::truncate();
         DB::statement("SET FOREIGN_KEY_CHECKS=1");
-        $types = [IllustrationEnum::REALISMO->name, IllustrationEnum::ACUARELA->name];
+        $types = [ [IllustrationEnum::REALISMO->name,100], [IllustrationEnum::ACUARELA->name,80]];
         foreach($types as $type){
             IllustrationType::create([
-                "type" => $type
+                "type" => $type[0],
+                "price"=> $type[1]
             ]);
         }
     }

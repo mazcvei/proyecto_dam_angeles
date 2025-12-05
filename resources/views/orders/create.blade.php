@@ -3,7 +3,6 @@
 @section('post_head')
 <style>
     body {
-        margin-top: 20px;
         background-color: #f8f9fa !important;
     }
 

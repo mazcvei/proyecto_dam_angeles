@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\IllustrationType;
 use App\Models\Order;
 use App\Models\OrderImages;
+use App\Models\OrderState;
 use App\Models\PaperSize;
 use App\Models\PaperType;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy("date","DESC")->get();
+        $orders = Order::orderBy("date","DESC")->paginate(20);
         return view('orders.index',compact('orders'));
     }
 
@@ -85,7 +86,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $orderStates = OrderState::all();
+        return view('orders.show', compact('order','orderStates'));
     }
 
     /**
@@ -110,7 +112,10 @@ class OrderController extends Controller
         ->orderBy("date","desc")
         ->get();
         return view('orders.index',compact('orders'));
-      
-
+    }
+    public function updateState(Order $order, Request $request)
+    {
+        $order->update(['state_id'=> $request->state]);
+        return redirect()->back()->with('success', 'Estado actualizado correctamente');
     }
 }

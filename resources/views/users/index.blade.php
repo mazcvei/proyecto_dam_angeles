@@ -20,7 +20,6 @@
         </div>
         <div class="col-12">
             <table class="table caption-top" id="tablaUsuarios">
-                <caption>Usuarios</caption>
                 <thead>
                     <tr>
                         <th scope="col">#</th>

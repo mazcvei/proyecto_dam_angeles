@@ -1,0 +1,210 @@
+@extends('layouts.app')
+
+@section('post_head')
+<style>
+    body {
+        background-color: #f8f9fa !important;
+    }
+
+    .order-list>li,
+    .total_price {
+        font-weight: bold;
+        list-style: circle;
+        margin: 0.5rem;
+    }
+
+    .mx-auto {
+        margin-right: auto !important;
+        margin-left: auto !important;
+    }
+
+    .rounded {
+        border-radius: 0.25rem !important;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        vertical-align: top;
+    }
+
+
+    .carousel-item img {
+        border-radius: 5px;
+        max-height: 60vh;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .btn-upload {
+        background-color: #0d6efd;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.3s
+    }
+
+    .btn-upload:hover {
+        background-color: #0b5ed7
+    }
+
+    .error_message {
+        color: red;
+        font-weight: bold;
+    }
+
+    @media screen and (max-width: 767px) {
+        .accordion-style .btn-link {
+            padding: 15px 40px 15px 55px;
+        }
+    }
+
+    @media screen and (max-width: 575px) {
+        .accordion-style .btn-link {
+            padding: 15px 30px 15px 55px;
+        }
+    }
+</style>
+
+@endsection
+@section('content')
+
+<div class="container">
+
+    <div class="row align-items-center">
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="col-lg-6 mb-4 mb-lg-0 mt-4">
+
+            <!-- CARRUSEL -->
+            <div id="carrusel_imagenes" class="mx-auto text-center mb-4">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner" id="carrusel_inner_container">
+                        @foreach($order->orderImages as $image)
+                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                            <img src="{{  asset('storage/'. $image->image_path ) }}" class="d-block w-100" alt="wedding-6873668_640.jpg">
+                        </div>
+                        @endforeach
+                    </div>
+
+                    <button class="carousel-control-prev" type="button"
+                        data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button"
+                        data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- COLUMNA DERECHA -->
+        <div class="col-lg-6">
+
+            <div class="ps-lg-6 ps-xl-10 w-lg-90">
+
+                <div class="mb-4">
+                    <h2 class="w-90">Datos del pedido</h2>
+                </div>
+
+                <div>
+          
+
+                    <ul class="items-order order-list">
+                        <li>
+                            <label>Fecha del pedido: {{ \Carbon\Carbon::parse($order->date)->format('d-m-Y H:i:s') }}</label>
+                        </li>
+                        <li>
+                            <label>Usuario: {{$order->UserOrder->name }}</label>
+                        </li>
+                        <li>
+                            <label>Tipo de papel: {{ $order->PaperType->type}}</label>
+                        </li>
+                        <li>
+                            <label>Tamaño de papel: {{ $order->PaperSize->size}}</label>
+                        </li>
+                        <li>
+                            <label>Tipo de ilustración: {{ $order->IllustrationType->type }} ({{ $order->IllustrationType->price }}€)</label>
+                        </li>
+                        <li>
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <span style="line-height: 38px;">Estado del pedido: </span>
+                                </div>
+                                @if(\App\Http\Helpers\UsersHelper::checkAdmin())
+                                <form style="display: contents;" action="{{ route('order.update.state',$order->id) }}" method="post">
+                                    @csrf
+                                    <div class="col-lg-6">
+                                        <select class="form-select" name="state">
+                                            @foreach($orderStates as $state)
+                                                <option @if($order->state_id == $state->id) selected @endif value="{{$state->id}}">{{$state->state}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="text-center">
+                                            <button type="submit" class="btn-upload" id="btn_order">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                                @else
+                                    <div class="col-lg-6">
+                                        <select class="form-select" name="state" disabled>
+                                            @foreach($orderStates as $state)
+                                            <option @if($order->order_state_id == $state->id) selected @endif value="{{$state->id}}">{{$state->state}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+                            </div>
+
+                        </li>
+                        <li>
+                            <label>Número de fotos: {{ $order->num_photos }}</label>
+                        </li>
+                        <span class="total_price">PRECIO TOTAL: {{ number_format($order->IllustrationType->price * $order->num_photos,2,',','.') }}€</span>
+
+                    </ul>
+                </div>
+
+
+            </div>
+
+        </div> <!-- FIN COLUMNA DERECHA -->
+
+
+
+    </div> <!-- FIN ROW -->
+
+</div>
+
+
+
+<script>
+    const btn_order = document.getElementById('btn_order');
+
+    const carrusel_imagenes = document.getElementById('carrusel_imagenes');
+    const carrusel_inner_container = document.getElementById('carrusel_inner_container');
+    const file_allow = ["image/jpeg", "image/jpg", "image/png"];
+    const container_errors = document.getElementById('errors');
+    const TAM_MAX = 6250000 //bytes
+</script>
+
+@endsection

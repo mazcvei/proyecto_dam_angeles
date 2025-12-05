@@ -49,8 +49,10 @@
                             @endif
                         </td>
                         <td>
-                            <a class="btn btn-edit" href="#">
-                                <i class="fa-solid fa-pen-to-square"></i>
+                            <a class="btn btn-edit" href="{{route('orders.show',$order->id)}}">
+                                <i class="fa-solid fa-eye">
+
+                                </i>
                             </a>
                             <a class="btn btn-delete" onclick="return confirm('¿Quieres borrar este pedido?')" href="{{ route('orders.delete',$order->id) }}">
                                 <i class="fa-solid fa-trash-can"></i>
@@ -61,6 +63,9 @@
                    
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center mb-4" >
+                {{ $orders->links() }}
+            </div>
         </div>
     </div>
 </div>
