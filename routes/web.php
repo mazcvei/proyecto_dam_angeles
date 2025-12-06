@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/pedidos-actualizar', [OrderController::class, 'update'])->name('orders.update');
         Route::get('/pedidos-eliminar/{order}', [OrderController::class, 'destroy'])->name('orders.delete');
         Route::post('/pedido-actualiza-estado/{order}', [OrderController::class, 'updateState'])->name('order.update.state');
-        Route::get('/descargar-imagenes/{order}', [OrderController::class, 'download_images'])->name('orders.download.images');
+        Route::get('/descargar-imagenes/{order}', [OrderController::class, 'downloadImages'])->name('orders.download.images');
 
 
 
