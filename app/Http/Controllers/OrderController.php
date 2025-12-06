@@ -19,6 +19,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::orderBy("date","DESC")->paginate(20);
+
         return view('orders.index',compact('orders'));
     }
 

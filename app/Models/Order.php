@@ -39,7 +39,7 @@ class Order extends Model
 
     public function OrderState()
     {
-        return $this->belongsTo(OrderState::class);
+        return $this->belongsTo(OrderState::class,'state_id','id');
     }
 
      public function OrderImages()
