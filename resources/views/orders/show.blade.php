@@ -17,6 +17,21 @@
         margin-right: auto !important;
         margin-left: auto !important;
     }
+     .btn-upload {
+        background-color: #0d6efd;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.3s
+    }
+
+    .btn-upload:hover {
+        background-color: #0b5ed7
+    }
+
 
     .rounded {
         border-radius: 0.25rem !important;
@@ -107,6 +122,13 @@
                     </button>
                 </div>
             </div>
+            <div class="mx-auto text-center">
+                    <a href="{{ route('orders.download.images',$order->id) }}" class="btn-upload">
+                        <i class="bi bi-download"></i> Descargar imágenes
+                    </a>
+                   
+            </div>
+            
 
 
         </div>

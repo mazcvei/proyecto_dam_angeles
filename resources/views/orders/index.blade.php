@@ -24,12 +24,12 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Fecha</th>
+                        <th scope="col">Cliente</th>
                         <th scope="col">Tipo de papel</th>
                         <th scope="col">Tamaño de papel</th>
                         <th scope="col">Tipo de ilustracion</th>
                         <th scope="col">Número de fotos</th>
                         <th scope="col">Estado del pedido</th>
-                        <th scope="col">Imagenes</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -38,25 +38,23 @@
                     <tr>
                         <td>{{$order->id}}</td>
                         <td>{{$order->date}}</td>
+                        <td>{{$order->UserOrder->name}}</td>
                         <td>{{$order->PaperType->type}}</td>
                         <td>{{$order->PaperSize->size}}</td>
                         <td>{{$order->IllustrationType->type}}</td>
                         <td>{{$order->num_photos}}</td>
                         <td>{{$order->OrderState->state}}</td>
                         <td>
-                            @if(count($order->OrderImages)>0)
-                                <img width="120" src="{{  asset('storage/'. $order->OrderImages[0]->image_path ) }}">
-                            @endif
-                        </td>
-                        <td>
                             <a class="btn btn-edit" href="{{route('orders.show',$order->id)}}">
                                 <i class="fa-solid fa-eye">
 
                                 </i>
                             </a>
+                            @if(\App\Http\Helpers\UsersHelper::checkAdmin())
                             <a class="btn btn-delete" onclick="return confirm('¿Quieres borrar este pedido?')" href="{{ route('orders.delete',$order->id) }}">
                                 <i class="fa-solid fa-trash-can"></i>
                             </a>
+                            @endif
                         </td>
                     </tr>
                    @endforeach
@@ -84,5 +82,8 @@
                 },
                 paging: false
             });
+
+
+
     </script>
 @endsection

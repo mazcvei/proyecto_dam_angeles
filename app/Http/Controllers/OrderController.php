@@ -10,6 +10,8 @@ use App\Models\PaperSize;
 use App\Models\PaperType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use ZipArchive;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -78,7 +80,7 @@ class OrderController extends Controller
     }
 
     return redirect()
-        ->route('orders.index')
+        ->route('my.orders')
         ->with('success', 'Pedido creado correctamente');
     }
 
@@ -104,14 +106,15 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect()->back()->with('success', 'Pedido eliminado correctamente');
     }
 
     public function myOrders()
     {
         $orders = Order::where('user_id', Auth::id())
         ->orderBy("date","desc")
-        ->get();
+        ->paginate(10);
         return view('orders.index',compact('orders'));
     }
     public function updateState(Order $order, Request $request)
@@ -119,4 +122,28 @@ class OrderController extends Controller
         $order->update(['state_id'=> $request->state]);
         return redirect()->back()->with('success', 'Estado actualizado correctamente');
     }
+
+    public function download_images(Order $order)  {
+        $zip = new ZipArchive();
+        $zipFileName = "ImagenesPedido_".$order->id.".zip";
+        $zipPath = storage_path('app\\'.$zipFileName); 
+        if($zip->open($zipPath,ZipArchive::CREATE | ZipArchive::OVERWRITE)!==true) {
+            dd("NO ABRE ARCHIVO EN".$zipPath);
+               // return response()->json([ 'error'=>"Error al abrir el zip"],500);
+        }
+
+        foreach($order->OrderImages as $file){
+            $storagePath = 'public/'.$file->image_path;
+            if(Storage::exists($storagePath)){
+                $zip->addFile(
+                    storage_path('app/'.$storagePath),
+                    basename($file->image_path)
+                );
+            }  
+        }
+        $zip->close();
+       // dd($zip);
+        return response()->download($zipPath)->deleteFileAfterSend(true);
+    }  
+
 }
