@@ -64,7 +64,7 @@ class OrderController extends Controller
         'paper_type_id'        => $request->paper_type,
         'paper_size_id'        => $request->size,
         'illustration_type_id' => $request->illustration_type,
-        'order_state_id'       => 1,                 
+        'state_id'       => 1,                 
         'num_photos'           => count($request->images),
     ]);
 

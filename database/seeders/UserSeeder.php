@@ -26,11 +26,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make("password")
         ]);
 
-        foreach(range(0,99) as $user_n){
+        foreach(range(0,end: 10) as $user_n){
             User::create([
                 "name"=> "user_$user_n",
                 "email"=> "user_$user_n@user.com",
-                 'rol_id' => 2,
+                "rol_id" => 2,
                 "password" => Hash::make("password")
             ]);
         }

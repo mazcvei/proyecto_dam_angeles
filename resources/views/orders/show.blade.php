@@ -168,7 +168,7 @@
                                     <div class="col-lg-6">
                                         <select class="form-select" name="state" disabled>
                                             @foreach($orderStates as $state)
-                                            <option @if($order->order_state_id == $state->id) selected @endif value="{{$state->id}}">{{$state->state}}</option>
+                                            <option @if($order->state_id == $state->id) selected @endif value="{{$state->id}}">{{$state->state}}</option>
                                             @endforeach
                                         </select>
                                     </div>

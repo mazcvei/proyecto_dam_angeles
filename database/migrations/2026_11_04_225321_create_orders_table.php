@@ -37,7 +37,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('illustration_types')
                 ->onDelete('cascade');
-            $table->foreign('order_state_id')
+            $table->foreign('state_id')
                 ->references('id')
                 ->on('order_states')
                 ->onDelete('cascade');
