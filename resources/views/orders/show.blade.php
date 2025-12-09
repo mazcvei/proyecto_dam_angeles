@@ -17,7 +17,8 @@
         margin-right: auto !important;
         margin-left: auto !important;
     }
-     .btn-upload {
+
+    .btn-upload {
         background-color: #0d6efd;
         color: white;
         border: none;
@@ -122,13 +123,15 @@
                     </button>
                 </div>
             </div>
+            @if(\App\Http\Helpers\UsersHelper::checkAdmin())
             <div class="mx-auto text-center">
-                    <a href="{{ route('orders.download.images',$order->id) }}" class="btn-upload">
-                        <i class="bi bi-download"></i> Descargar imágenes
-                    </a>
-                   
+                <a href="{{ route('orders.download.images',$order->id) }}" class="btn-upload">
+                    <i class="bi bi-download"></i> Descargar imágenes
+                </a>
+
             </div>
-            
+            @endif
+
 
 
         </div>
@@ -141,10 +144,7 @@
                 <div class="mb-4">
                     <h2 class="w-90">Datos del pedido</h2>
                 </div>
-
                 <div>
-          
-
                     <ul class="items-order order-list">
                         <li>
                             <label>Fecha del pedido: {{ \Carbon\Carbon::parse($order->date)->format('d-m-Y H:i:s') }}</label>
@@ -173,7 +173,7 @@
                                     <div class="col-lg-6">
                                         <select class="form-select" name="state">
                                             @foreach($orderStates as $state)
-                                                <option @if($order->state_id == $state->id) selected @endif value="{{$state->id}}">{{$state->state}}</option>
+                                            <option @if($order->state_id == $state->id) selected @endif value="{{$state->id}}">{{$state->state}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -187,13 +187,13 @@
 
                                 </form>
                                 @else
-                                    <div class="col-lg-6">
-                                        <select class="form-select" name="state" disabled>
-                                            @foreach($orderStates as $state)
-                                            <option @if($order->state_id == $state->id) selected @endif value="{{$state->id}}">{{$state->state}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                <div class="col-lg-6">
+                                    <select class="form-select" name="state" disabled>
+                                        @foreach($orderStates as $state)
+                                        <option @if($order->state_id == $state->id) selected @endif value="{{$state->id}}">{{$state->state}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 @endif
                             </div>
 

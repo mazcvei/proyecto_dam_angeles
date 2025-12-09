@@ -8,7 +8,8 @@
         @yield('content')
         @include('layouts.scripts')
         @yield('script')
-
+        @include('layouts.footer')
     </body>
+  
 
 </html>

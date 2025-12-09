@@ -45,3 +45,22 @@ li{
 ul{
     margin-bottom: 0rem;
 }
+footer{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer a:hover {
+        opacity: 0.7;
+        transition: 0.3s;
+       
+}
+.carousel-control-prev-icon,.carousel-control-next-icon {
+    background-color: black;
+    padding: 1rem;
+    border-radius: 50%
+}
+.card{
+    height: 58vh;
+}

@@ -22,7 +22,6 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::orderBy("date", "DESC")->paginate(20);
-
         return view('orders.index', compact('orders'));
     }
 
@@ -42,7 +41,6 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $request->validate([
             'paper_type'        => 'required|exists:paper_types,id',
             'size'              => 'required|exists:paper_sizes,id',
@@ -94,19 +92,17 @@ class OrderController extends Controller
         return view('orders.show', compact('order', 'orderStates'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Order $order)
     {
+        foreach ($order->OrderImages as $image) {
+            if(Storage::disk('public')->exists($image->image_path)) {
+                   Storage::disk('public')->delete($image->image_path);
+            }
+        }
         $order->delete();
         return redirect()->back()->with('success', 'Pedido eliminado correctamente');
     }

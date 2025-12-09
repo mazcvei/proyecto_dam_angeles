@@ -13,9 +13,6 @@
                 <!-- Left Side -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/') }}">{{ __('Inicio') }}</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#">{{ __('Acerca de') }}</a>
                     </li>
                 </ul>
@@ -32,14 +29,14 @@
                     @else   
                         @if(\App\Http\Helpers\UsersHelper::checkAdmin())
                          <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.index') }}">Listar usuarios</a>
+                            <a class="nav-link" href="{{ route('user.index') }}">Usuarios</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('rol.index') }}">Listar roles</a>
+                            <a class="nav-link" href="{{ route('rol.index') }}">Roles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('orders.index') }}">Listar pedidos</a>
+                            <a class="nav-link" href="{{ route('orders.index') }}">Pedidos</a>
                         </li>
                         @endif
                       
@@ -49,7 +46,7 @@
                             </a>
 
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="{{route('user.show')}}">{{ __('Perfil') }}</a></li>
+                                <li><a class="dropdown-item" href="{{route('user.show')}}">Mi perfil</a></li>
                                 <li><a class="dropdown-item" href="{{route('my.orders')}}">Mis pedidos</a></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
