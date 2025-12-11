@@ -12,6 +12,20 @@
 
 <div class="container">
     <div class="row">
+         @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
 
         <div class="col-12 py-4" id="carrusel">
             <h1>Algunos trabajos</h1>
@@ -92,14 +106,15 @@
 
 
         <div class="col-12 col-md-8 m-auto py-4" id="contacto">
-            <form>
+            <form action="{{ route('create.contact') }}" method="post">
+                @csrf
                 <div class="row">
                     <div class="col-12">
                         <h1>Contacto</h1>
                     </div>
                     <div class="col-md-4">
                         <label>Nombre y apellidos </label>
-                        <input class="form-control" type="text" name="nombre">
+                        <input class="form-control" type="text" name="name">
                     </div>
                     <div class="col-md-4">
                         <label>Email</label>
@@ -107,11 +122,11 @@
                     </div>
                     <div class="col-md-4 mb-2">
                         <label>Teléfono</label>
-                        <input class="form-control" type="number" name="telefono">
+                        <input class="form-control" type="number" name="phone">
                     </div>
                     <div class="col-md-12 mt-2">
                         <label>Mensaje</label>
-                        <textarea rows="10" class="form-control" name="mensaje" placeholder="Escbribe tu mensaje..."></textarea>
+                        <textarea rows="10" class="form-control" name="message" placeholder="Escbribe tu mensaje..."></textarea>
                     </div>
                     <div class="col-12 mt-3">
                         <button type="submit" class="btn btn-lg btn-primary">Enviar</button>
