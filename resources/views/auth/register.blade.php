@@ -78,11 +78,11 @@
                 {{-- Actions --}}
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="{{ route('login') }}" class="text-decoration-none small text-muted">
-                        {{ __('Already registered?') }}
+                       Entrar
                     </a>
 
                     <button type="submit" class="btn btn-primary">
-                        {{ __('Register') }}
+                        Registro
                     </button>
                 </div>
             </form>

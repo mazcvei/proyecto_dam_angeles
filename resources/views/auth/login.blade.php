@@ -59,7 +59,7 @@
                         id="remember_me"
                     >
                     <label class="form-check-label" for="remember_me">
-                        {{ __('Remember me') }}
+                        Recordar
                     </label>
                 </div>
 
@@ -67,12 +67,12 @@
                 <div class="d-flex justify-content-between align-items-center">
                     @if (Route::has('password.request'))
                         <a href="{{ route('password.request') }}" class="text-decoration-none small text-muted">
-                            {{ __('Forgot your password?') }}
+                            ¿Olvidaste la contraseña?
                         </a>
                     @endif
 
                     <button type="submit" class="btn btn-primary">
-                        {{ __('Log in') }}
+                        Entrar
                     </button>
                 </div>
             </form>

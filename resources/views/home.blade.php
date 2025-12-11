@@ -90,9 +90,37 @@
 
         </div>
 
-        <div class="col-12 py-4" id="contacto">
-            <h1>Contacto</h1>
+
+        <div class="col-12 col-md-8 m-auto py-4" id="contacto">
+            <form>
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Contacto</h1>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Nombre y apellidos </label>
+                        <input class="form-control" type="text" name="nombre">
+                    </div>
+                    <div class="col-md-4">
+                        <label>Email</label>
+                        <input class="form-control" type="email" name="email">
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <label>Teléfono</label>
+                        <input class="form-control" type="number" name="telefono">
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        <label>Mensaje</label>
+                        <textarea rows="10" class="form-control" name="mensaje" placeholder="Escbribe tu mensaje..."></textarea>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <button type="submit" class="btn btn-lg btn-primary">Enviar</button>
+                    </div>
+
+                </div>
+            </form>
         </div>
+
     </div>
 </div>
 
