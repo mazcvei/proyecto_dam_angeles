@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PaperSizeSeeder::class);
         $this->call(PaperTypeSeeder::class);
         $this->call(OrderSeeder::class);
+        $this->call(SettingSeeder::class);
 
     }
 }

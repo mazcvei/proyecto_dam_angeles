@@ -8,20 +8,23 @@
         object-fit: contain;
         border-radius: 3px;
     }
+    .card{
+        height: 58vh;
+    }
 </style>
 
 <div class="container">
     <div class="row">
-         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-            @if(session('success'))
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
@@ -114,19 +117,19 @@
                     </div>
                     <div class="col-md-4">
                         <label>Nombre y apellidos </label>
-                        <input class="form-control" type="text" name="name">
+                        <input class="form-control" type="text" value="{{ old('name') }}" name="name">
                     </div>
                     <div class="col-md-4">
                         <label>Email</label>
-                        <input class="form-control" type="email" name="email">
+                        <input class="form-control" type="email" value="{{ old('email') }}" name="email">
                     </div>
                     <div class="col-md-4 mb-2">
                         <label>Teléfono</label>
-                        <input class="form-control" type="number" name="phone">
+                        <input class="form-control" type="number"  value="{{ old('phone') }}" name="phone">
                     </div>
                     <div class="col-md-12 mt-2">
                         <label>Mensaje</label>
-                        <textarea rows="10" class="form-control" name="message" placeholder="Escbribe tu mensaje..."></textarea>
+                        <textarea rows="10" class="form-control" name="message" placeholder="Escbribe tu mensaje...">{{ old('message') }}</textarea>
                     </div>
                     <div class="col-12 mt-3">
                         <button type="submit" class="btn btn-lg btn-primary">Enviar</button>

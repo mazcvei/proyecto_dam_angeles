@@ -16,17 +16,16 @@ class HomeController extends Controller
 
     public function storeContact(Request $request)
     {
-        //dd($request->all());
         $request->validate([
             'name' => 'required|string|min:10|max:255',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email',
             'phone' => 'required|regex:/^[67]\d{8}$/',
-            'message' => 'required|string|min: 10|max:255',
+            'message' => 'required|string|min: 10|max:1000',
         ],[
-            'name.required'   => 'Debe escribir un nombre y apellido.',
-            'name.string'         => 'Debe ser una cadena de texto.',
-            'name.min' => 'Debe ser como minimo 10 caracteres.',
-            'name.max'       => 'Debe ser como maximo 255 carcteres.',
+            'name.required'   => 'Debe escribir un nombre y apellidos.',
+            'name.string'         => 'El nombre debe ser una cadena de texto.',
+            'name.min' => 'El nombre debe ser como mínimo de 10 carácteres.',
+            'name.max'       => 'El nombre debe ser como máximo 1000 carácteres.',
         ]);
 
         Contact::create([
