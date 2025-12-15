@@ -6,8 +6,7 @@
             <div class="col-md-4 col-sm-12">
                 <h5 class="fw-bold">IlustraEvento</h5>
                 <p class="small text-muted">
-                    EDITAR
-                    Tu descripción breve aquí. Servicios, productos o información relevante de tu sitio.
+                {{ $settings->description }}
                 </p>
             </div>
 
@@ -15,8 +14,8 @@
             <div class="col-md-4 col-sm-12">
                 <h5 class="fw-bold">Contacto</h5>
                 <ul class="list-unstyled small">
-                    <li><i class="bi bi-envelope me-2"></i>EDITAR </li>
-                    <li><i class="bi bi-telephone me-2"></i> EDITAR</li>
+                    <li><i class="bi bi-envelope me-2"></i>{{$settings->email_contact}} </li>
+                    <li><i class="bi bi-telephone me-2"></i> {{$settings->phone_contact}}</li>
                 </ul>
             </div>
 
@@ -24,7 +23,7 @@
             <div class="col-md-4 col-sm-12">
                 <h5 class="fw-bold">Síguenos</h5>
                 <div class="d-flex gap-3">
-                    <a href="https://www.instagram.com/ilustrasetting/" class="text-light fs-5"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="{{ $settings->url_instagram }}" class="text-light fs-5" target="_blank"><i class="fa-brands fa-instagram" ></i></a>
                 </div>
             </div>
 
