@@ -25,8 +25,8 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(250);
         Paginator::useBootstrapFive();
 
-        View::composer('*', function ($view) {
-        $view->with('settings', Setting::first());
-    });
+       /*  View::composer('*', function ($view) {
+        $view->with('settings', Setting::first()); */
+   // });
     }
 }

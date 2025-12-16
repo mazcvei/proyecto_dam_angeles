@@ -125,7 +125,7 @@
                     </div>
                     <div class="col-md-4 mb-2">
                         <label>Teléfono</label>
-                        <input class="form-control" type="number"  value="{{ old('phone') }}" name="phone">
+                        <input class="form-control" type="number" min="600000000"  value="{{ old('phone') }}" name="phone">
                     </div>
                     <div class="col-md-12 mt-2">
                         <label>Mensaje</label>

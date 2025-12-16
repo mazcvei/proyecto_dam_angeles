@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PaperTypeSeeder::class);
         $this->call(OrderSeeder::class);
         $this->call(SettingSeeder::class);
+        $this->call(ServiceSeeder::class);
 
     }
 }
