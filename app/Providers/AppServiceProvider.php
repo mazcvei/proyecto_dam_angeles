@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Setting;
+use Illuminate\Support\Facades\View;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -22,5 +24,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(250);
         Paginator::useBootstrapFive();
+
+        View::composer('*', function ($view) {
+        $view->with('settings', Setting::first());
+    });
     }
 }

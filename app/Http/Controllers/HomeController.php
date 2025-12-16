@@ -11,8 +11,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(){
-        $settings= Setting::first();
-        return view('home',['settings'=>$settings]);
+        return view('home');
     }
 
     public function storeContact(Request $request)
