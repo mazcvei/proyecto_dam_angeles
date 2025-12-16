@@ -13,6 +13,7 @@
     }
 </style>
 
+
 <div class="container">
     <div class="row">
         @if ($errors->any())
@@ -58,51 +59,20 @@
             </div>
 
         </div>
-
+    
+   
         <div class="col-12 py-4" id="servicios">
             <h1>Nuestros servicios</h1>
             <div class="row">
+                @foreach ( $services as $service )
                 <div class="col-md-3 card m-auto mt-1">
                     <div class="card-body">
-                        <h5 class="card-title">Qué hacemos</h5>
-                        <p class="card-text">
-                            En IlustraEventos transformamos tus fotografías más especiales en ilustraciones únicas y llenas de emoción. Bodas, bautizos, comuniones o cualquier momento inolvidable: cada evento merece ser recordado de una forma artística, elegante y completamente personalizada.
+                        <h5 class="card-title">{{ $service->title }}</h5>
+                        <p class="card-text">{{ $service->description }}
                         </p>
                     </div>
                 </div>
-                <div class="col-md-3 card m-auto mt-1">
-                    <div class="card-body">
-                        <h5 class="card-title">Como lo hacemos</h5>
-                        <p class="card-text">
-                            Realiza tu pedido de manera sencilla y deja que nuestro equipo dé vida a tus recuerdos. Solo tienes que elegir:
-                            <br>
-                            🎨 Tipo de ilustración:
-                            — Acuarela, con un estilo suave, romántico y lleno de color
-                            — Realismo, para un acabado detallado y fiel a tu fotografía
-                            <br>
-                            📐 Tamaño:
-                            — A5
-                            — A6
-                            <br>
-                            📄 Tipo de papel:
-                            — Cartulina artística
-                            — Papel fotográfico de alta calidad
-
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3 card m-auto mt-1">
-                    <div class="card-body">
-                        <h5 class="card-title">Resultado final</h5>
-                        <p class="card-text">
-                            Una vez realizado el pedido, comenzamos a trabajar en tu ilustración. Solo se requiere un adelanto del 25% para reservar tu encargo, y te enviaremos la obra final terminada y lista para disfrutar o regalar.
-                            <br>
-                            En IlustraEventos no solo ilustramos fotos: capturamos emociones, contamos historias y creamos recuerdos eternos.
-                            <br>
-                            ✨ Dale un toque especial a tus momentos más importantes. Te esperamos.
-                        </p>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
         </div>

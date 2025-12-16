@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\User;
 use App\Models\Rol;
+use App\Models\Service;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index(){
-        return view('home');
+        $services = Service::all();
+        return view('home',compact('services'));
+        
     }
 
     public function storeContact(Request $request)
@@ -50,5 +53,6 @@ class HomeController extends Controller
         return redirect()
             ->route('home')
             ->with('success', 'Contacto enviado correctamente');
+
     }
 }
