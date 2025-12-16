@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ServiceController;
 use App\Models\illustrationType;
 
 Route::get('/test', function () {
@@ -55,6 +56,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/pedidos-eliminar/{order}', [OrderController::class, 'destroy'])->name('orders.delete');
         Route::post('/pedido-actualiza-estado/{order}', [OrderController::class, 'updateState'])->name('order.update.state');
         Route::get('/descargar-imagenes/{order}', [OrderController::class, 'downloadImages'])->name('orders.download.images');
+
+         //Services 
+        Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+        Route::get('/crear-editar-service/{id?}', [ServiceController::class, 'edit'])->name('service.create.edit');
+        Route::post('/service-actualizar', [ServiceController::class, 'update'])->name(name: 'service.update');
+        Route::post('/service-crear', [ServiceController::class, 'store'])->name('service.store');
+        Route::get('/service-eliminar/{id}', [ServiceController::class, 'destroy'])->name('service.delete');
 
 
 

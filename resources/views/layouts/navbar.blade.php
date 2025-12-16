@@ -38,6 +38,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('orders.index') }}">Pedidos</a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('services.index') }}">Servicios</a>
+                        </li>
                         @endif
                       
                         <li class="nav-item dropdown">
