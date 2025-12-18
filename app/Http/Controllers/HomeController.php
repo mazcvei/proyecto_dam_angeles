@@ -12,9 +12,8 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(){
-        $services = Service::all();
-        return view('home',compact('services'));
-        
+        $services = Service::limit(3)->get();
+        return view('home',compact('services'));  
     }
 
     public function storeContact(Request $request)

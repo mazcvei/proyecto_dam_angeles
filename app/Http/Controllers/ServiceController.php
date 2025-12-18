@@ -10,8 +10,6 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Service::all();
-        //$services = Service::limit(3)->get(); no funciona
-        //$services = Service::take(3)->get(); tampoco
         return view('services.index',compact('services'));
     }
 

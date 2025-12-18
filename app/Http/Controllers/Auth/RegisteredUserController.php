@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\RolEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -34,10 +35,11 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+       
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'rol_id' => RolEnum::CLIENTE->value,
             'password' => Hash::make($request->password),
         ]);
 

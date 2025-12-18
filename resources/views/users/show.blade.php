@@ -29,7 +29,7 @@
              
                 <div class="mb-3">
                     <label for="rol_id" class="form-label">Rol</label>
-                    <select required name="rol_id" id="rol_id" class="form-select" required>
+                    <select @if(!\App\Http\Helpers\UsersHelper::checkAdmin()) disabled @endif required name="rol_id" id="rol_id" class="form-select" required>
                     <option value="">Seleccionar rol</option>
                         @foreach($roles as $rol)
                             <option 

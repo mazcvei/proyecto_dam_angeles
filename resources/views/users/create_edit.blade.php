@@ -22,9 +22,11 @@
                 @if(isset($user))
                     <input type="hidden" name="id" value="{{$user->id}}">
                 @endif
+            
                 <div class="mb-3">
                     <label for="rol_id" class="form-label">Rol</label>
-                    <select required name="rol_id" id="rol_id" class="form-select" required>
+                    <select 
+                      name="rol_id" id="rol_id" class="form-select" required>
                     <option value="">Seleccionar rol</option>
                         @foreach($roles as $rol)
                             <option 
@@ -35,6 +37,7 @@
                         @endforeach
                     </select>
                 </div>
+               
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
                     <input type="text" name="name" required class="form-control" id="name" value="{{ isset($user) ? $user->name : '' }}">

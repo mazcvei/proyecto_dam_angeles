@@ -13,7 +13,6 @@
     }
 </style>
 
-
 <div class="container">
     <div class="row">
         @if ($errors->any())

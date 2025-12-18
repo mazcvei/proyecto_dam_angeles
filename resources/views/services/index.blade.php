@@ -18,7 +18,7 @@
                                 Nuevo servicio
              </a>
         </div>
-        <div class="col-12 col-md-6 m-auto">
+        <div class="col-12 col-md-10 m-auto">
             <table class="table caption-top">
                 <thead>
                     <tr>

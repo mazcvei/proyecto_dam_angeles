@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\UsersHelper;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -87,8 +88,9 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->rol_id = $request->rol_id;
-
+        if(UsersHelper::checkAdmin()){
+            $user->rol_id = $request->rol_id;
+        }
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
