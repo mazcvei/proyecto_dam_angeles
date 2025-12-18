@@ -9,7 +9,14 @@
         border-radius: 3px;
     }
     .card{
-        height: 58vh;
+        height: 55vh;
+    }
+
+    @media (max-width: 680px){
+        .card{
+            height: auto;
+        }
+
     }
 </style>
 
