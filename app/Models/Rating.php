@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Rating extends Model
 {
     protected $table = "ratings";
-    protected $fillable = ["punctuation","description"];
+    protected $fillable = ["score","description","user_id","order_id"];
 }
