@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Rating;
 use Illuminate\Http\Request;
 
@@ -24,60 +25,25 @@ class RatingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           "punctuation" => "required|integer|min:1|max:5",
+           "score" => "required|integer|min:0|max:5",
            "description" => "required|string|min:3"
 
         ],[
-           "punctuation.required" => 'La puntuación es obligatoria',
-           "punctuation.integer" => 'La puntuación debe ser un número',
-           "punctuation.min" => 'La puntuación mínima es 1',
-           "punctuation.max" => 'La puntuación máxima es 5',
+           "score.required" => 'La puntuación es obligatoria',
+           "score.integer" => 'La puntuación debe ser un número',
+           "score.min" => 'La puntuación mínima es 0',
+           "score.max" => 'La puntuación máxima es 5',
            "description.required" => "El campo descripción es obligatorio", 
            "description.string" => "El campo descripción es una cádena de texto", 
            "description.min" => "El campo descripción debe tener mínimo 3 carácteres",
         ]);
         Rating::create([
-            "punctuation" => $request->punctuation,
+            "score" => $request->score,
             "description"=> $request->description,
         ]);
          return redirect()
-            ->route('ratings.index')
-            ->with("success", "Valoración creado correctamente");
+            ->route('my.orders')
+            ->with("success", "Valoración creada correctamente");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Rating $rating)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Rating $rating)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Rating $rating)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Rating $rating)
-    {
-        //
-    }
 }

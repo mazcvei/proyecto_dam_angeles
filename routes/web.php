@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
 
         //Ratings
         Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index');
+        Route::get('/ratings/{order}', [RatingController::class, 'ratingsOrder'])->name('ratings.order');
         Route::post('/rating-crear', [RatingController::class, 'store'])->name('rating.store');
 
 

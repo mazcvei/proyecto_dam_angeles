@@ -72,6 +72,18 @@
         font-weight: bold;
     }
 
+    .table_container {
+        height: 40vh;
+        overflow-y: scroll;
+
+    }
+
+    table {
+        background-color: #cad1f1;
+        border-radius: 5px;
+
+    }
+
     @media screen and (max-width: 767px) {
         .accordion-style .btn-link {
             padding: 15px 40px 15px 55px;
@@ -214,6 +226,44 @@
 
 
     </div> <!-- FIN ROW -->
+    <div class="row mt-4">
+        <h1 class="m-2 text-center">RESEÑAS</h1>
+        <div class="col-12 table_container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Comentario</th>
+                        <th scope="col">Puntuación</th>
+                        <th scope="col">Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @forelse($order->OrderRatings as $rating)
+                    <tr>
+                        <td class="w-10">{{$rating->ratingUser->name}}</td>
+                        <td class="text-start w-50">{{$rating->description}}</td>
+                        <td class="w-35">
+                            @for($i=0; $i<$rating->score; $i++)
+                                <i class="fa-solid fa-star" style="color:orange"></i>
+                                @endfor
+                                @for($i=$rating->score; $i<5; $i++)
+                                    <i class="fa-regular fa-star"></i>
+                                    @endfor
+                        </td>
+                        <td class="w-25">{{ Carbon\Carbon::parse($rating->created_at)->format('d-m-Y H:i:s')  }}</td>
+                    </tr>
+                    @empty
+                    <h3>No hay valoraciones</h3>
+                    @endforelse
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 
 </div>
 

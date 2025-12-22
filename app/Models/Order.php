@@ -46,4 +46,9 @@ class Order extends Model
     {
         return $this->hasMany(OrderImages::class);
     }
+
+    public function OrderRatings()
+    {
+        return $this->hasMany(Rating::class);
+    }
 }
