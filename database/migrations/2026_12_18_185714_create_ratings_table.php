@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
+            $table->number("punctuation",5);
+            $table->text("description");
             $table->timestamps();
         });
     }

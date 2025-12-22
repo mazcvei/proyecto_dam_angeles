@@ -64,6 +64,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/service-crear', [ServiceController::class, 'store'])->name('service.store');
         Route::get('/service-eliminar/{id}', [ServiceController::class, 'destroy'])->name('service.delete');
 
+        //Ratings
+        Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index');
+        Route::post('/rating-crear', [RatingController::class, 'store'])->name('rating.store');
 
 
     });
