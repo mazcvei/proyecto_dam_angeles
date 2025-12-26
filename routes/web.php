@@ -13,7 +13,7 @@ use App\Models\illustrationType;
 
 Route::get('/test', function () {
     dd(IllustrationType::inRandomOrder()->first()->id);
-   $illustrationType = IllustrationType::inRandomOrder()->first()->id;
+    $illustrationType = IllustrationType::inRandomOrder()->first()->id;
     return  $illustrationType;
 });
 Route::get('/', [HomeController::class,'index'])->name( 'home');

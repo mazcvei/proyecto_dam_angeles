@@ -55,6 +55,53 @@
                                 <i class="fa-solid fa-trash-can"></i>
                             </a>
                             @endif
+
+                            @php
+                                $isDelivered = $order->OrderState->state === \App\Enums\StateEnum::ENTREGADO->value;
+                                $hasRated = $order->hasUserRated(auth()->id());
+                            @endphp
+
+                            @if($isDelivered && !$hasRated && !\App\Http\Helpers\UsersHelper::checkAdmin())
+                                <!-- Botón de valoración -->
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#ratingModal-{{ $order->id }}">
+                                    <i class="fa-solid fa-star"></i>
+                                </button>
+
+                                <!-- Modal para este pedido -->
+                                <div class="modal fade" id="ratingModal-{{ $order->id }}" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <form method="POST" action="{{ route('rating.store') }}">
+                                            @csrf
+                                            <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Valorar pedido #{{ $order->id }}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <label class="form-label">Puntuación</label>
+                                                    <select name="score" class="form-select" required>
+                                                        <option value="">Selecciona</option>
+                                                        <option value="5">⭐⭐⭐⭐⭐</option>
+                                                        <option value="4">⭐⭐⭐⭐</option>
+                                                        <option value="3">⭐⭐⭐</option>
+                                                        <option value="2">⭐⭐</option>
+                                                        <option value="1">⭐</option>
+                                                    </select>
+
+                                                    <label class="form-label mt-3">Comentario</label>
+                                                    <textarea name="description" class="form-control" rows="3"></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success">Enviar valoración</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            @endif
+
+
                         </td>
                     </tr>
                    @endforeach

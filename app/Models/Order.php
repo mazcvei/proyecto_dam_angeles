@@ -51,4 +51,8 @@ class Order extends Model
     {
         return $this->hasMany(Rating::class);
     }
+    public function hasUserRated($userId)
+    {
+        return $this->OrderRatings()->where('user_id', $userId)->exists();
+    }
 }

@@ -88,6 +88,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        //dd($order);
         $orderStates = OrderState::all();
         return view('orders.show', compact('order', 'orderStates'));
     }
@@ -110,6 +111,7 @@ class OrderController extends Controller
     public function myOrders()
     {
         $orders = Order::where('user_id', Auth::id())
+            ->with(['UserOrder','PaperType','PaperSize','IllustrationType','OrderState','OrderRatings'])
             ->orderBy("date", "desc")
             ->paginate(10);
         return view('orders.index', compact('orders'));

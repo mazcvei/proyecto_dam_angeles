@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@php
+use App\Enums\StateEnum;
+@endphp
+
 @section('post_head')
 <style>
     body {
@@ -213,14 +217,12 @@
                         <li>
                             <label>Número de fotos: {{ $order->num_photos }}</label>
                         </li>
-                        <span class="total_price">PRECIO TOTAL: {{ number_format($order->IllustrationType->price * $order->num_photos,2,',','.') }}€</span>
-
+                        <li>
+                            <span class="total_price">PRECIO TOTAL: ...</span>
+                        </li>
                     </ul>
                 </div>
-
-
             </div>
-
         </div> <!-- FIN COLUMNA DERECHA -->
 
 
@@ -266,8 +268,6 @@
     </div>
 
 </div>
-
-
 
 <script>
     const btn_order = document.getElementById('btn_order');
