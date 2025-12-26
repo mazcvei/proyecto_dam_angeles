@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RatingController extends Controller
 {
@@ -40,19 +41,19 @@ class RatingController extends Controller
         }
 
         // Evitar doble valoración
-        if ($order->OrderRatings()->where('user_id', auth()->id())->exists()) {
+        if ($order->OrderRatings()->where('user_id', Auth::id())->exists()) {
             return back()->with('success', 'Ya has valorado este pedido.');
         }
 
         Rating::create([
             "order_id" => $order->id,
-            "user_id" => auth()->id(),
+            "user_id" => Auth::id(),
             "score" => $request->score,
             "description" => $request->description,
         ]);
 
         return redirect()
-            ->route('orders.show', $order->id)
+            ->route('my.orders')
             ->with("success", "Valoración creada correctamente");
     }
 }

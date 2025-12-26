@@ -14,7 +14,6 @@ use App\Enums\StateEnum;
     .total_price {
         font-weight: bold;
         list-style: circle;
-        margin: 0.5rem;
     }
 
     .mx-auto {
@@ -218,12 +217,12 @@ use App\Enums\StateEnum;
                             <label>Número de fotos: {{ $order->num_photos }}</label>
                         </li>
                         <li>
-                            <span class="total_price">PRECIO TOTAL: ...</span>
+                            <span class="total_price mt-4">PRECIO TOTAL: {{ number_format($order->IllustrationType->price * $order->num_photos,2) }}€ </span>
                         </li>
                     </ul>
                 </div>
             </div>
-        </div> <!-- FIN COLUMNA DERECHA -->
+        </div> 
 
 
 
@@ -249,10 +248,10 @@ use App\Enums\StateEnum;
                         <td class="w-35">
                             @for($i=0; $i<$rating->score; $i++)
                                 <i class="fa-solid fa-star" style="color:orange"></i>
-                                @endfor
-                                @for($i=$rating->score; $i<5; $i++)
+                            @endfor
+                            @for($i=$rating->score; $i<5; $i++)
                                     <i class="fa-regular fa-star"></i>
-                                    @endfor
+                            @endfor
                         </td>
                         <td class="w-25">{{ Carbon\Carbon::parse($rating->created_at)->format('d-m-Y H:i:s')  }}</td>
                     </tr>

@@ -57,17 +57,16 @@
                             @endif
 
                             @php
+
                                 $isDelivered = $order->OrderState->state === \App\Enums\StateEnum::ENTREGADO->value;
                                 $hasRated = $order->hasUserRated(auth()->id());
                             @endphp
 
                             @if($isDelivered && !$hasRated && !\App\Http\Helpers\UsersHelper::checkAdmin())
-                                <!-- Botón de valoración -->
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#ratingModal-{{ $order->id }}">
+                           
+                                <button class="btn btn-warning btn-md" data-bs-toggle="modal" data-bs-target="#ratingModal-{{ $order->id }}">
                                     <i class="fa-solid fa-star"></i>
                                 </button>
-
-                                <!-- Modal para este pedido -->
                                 <div class="modal fade" id="ratingModal-{{ $order->id }}" tabindex="-1">
                                     <div class="modal-dialog">
                                         <form method="POST" action="{{ route('rating.store') }}">

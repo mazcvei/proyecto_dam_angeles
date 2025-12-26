@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ServiceController;
-use App\Models\illustrationType;
 
-Route::get('/test', function () {
-    dd(IllustrationType::inRandomOrder()->first()->id);
-    $illustrationType = IllustrationType::inRandomOrder()->first()->id;
-    return  $illustrationType;
+
+Route::get('/testemail', function () {
+     
+
+        echo 'envio ok';
 });
 Route::get('/', [HomeController::class,'index'])->name( 'home');
 
@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/nuevo-pedido', [OrderController::class, 'create'])->name('create.order');
     Route::post('/pedidos-crear', [OrderController::class, 'store'])->name('orders.store');
     Route::get('/ver-pedido/{order}', [OrderController::class, 'show'])->name('orders.show');
-
+    Route::post('/rating-crear', [RatingController::class, 'store'])->name('rating.store');
 
     //Users 
     Route::middleware('admin')->group(function () {
@@ -68,7 +68,6 @@ Route::middleware('auth')->group(function () {
         //Ratings
         Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index');
         Route::get('/ratings/{order}', [RatingController::class, 'ratingsOrder'])->name('ratings.order');
-        Route::post('/rating-crear', [RatingController::class, 'store'])->name('rating.store');
 
 
     });

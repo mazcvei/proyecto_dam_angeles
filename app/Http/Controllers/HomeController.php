@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\Rating;
 use App\Models\User;
 use App\Models\Rol;
 use App\Models\Service;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Resend\Laravel\Facades\Resend;
+use App\Mail\ContactEmail;
 
 class HomeController extends Controller
 {
     public function index(){
         $services = Service::limit(3)->get();
-        return view('home',compact('services'));  
+        $ratings = Rating::orderBy('score', 'desc')->limit(10)->get();
+        return view('home',compact('services','ratings'));  
     }
 
     public function storeContact(Request $request)
@@ -48,7 +52,12 @@ class HomeController extends Controller
             'phone' => $request->phone,
             'message' => $request->message,
         ]);
-
+        Resend::emails()->send([
+            'from' => 'Acme <onboarding@resend.dev>',
+            'to' => 'angeles.trejo.croce@gmail.com',
+            'subject' => 'Prueba contacto',
+            'html' => (new ContactEmail())->render(),
+        ]);
         return redirect()
             ->route('home')
             ->with('success', 'Contacto enviado correctamente');

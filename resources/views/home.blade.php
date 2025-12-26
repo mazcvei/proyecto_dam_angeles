@@ -8,12 +8,13 @@
         object-fit: contain;
         border-radius: 3px;
     }
-    .card{
+
+    .card {
         height: 55vh;
     }
 
-    @media (max-width: 680px){
-        .card{
+    @media (max-width: 680px) {
+        .card {
             height: auto;
         }
 
@@ -65,8 +66,8 @@
             </div>
 
         </div>
-    
-   
+
+
         <div class="col-12 py-4" id="servicios">
             <h1>Nuestros servicios</h1>
             <div class="row">
@@ -83,6 +84,40 @@
 
         </div>
 
+        <div class="col-12 py-4" id="resenas">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-10 col-xl-8 text-center">
+                    <h1>Reseñas</h1>
+                </div>
+            </div>
+            <div class="row text-center owl-carousel owl-theme mt-4">
+
+                @foreach($ratings as $rating)
+                <div class="mb-5 mb-md-0 item">
+                    <h5 class="mb-3">{{$rating->ratingUser->name}}</h5>
+                    <h6 class="text-primary mb-3">Tipo de Servicio: {{$rating->order->IllustrationType->type}}</h6>
+                    <p class="px-xl-3">
+                        <i class="fas fa-quote-left pe-2"></i>{{ $rating->description }}
+                    </p>
+                    <ul class="list-unstyled d-flex justify-content-center mb-0">
+                        @for($i=0; $i<$rating->score; $i++)
+                            <li>
+                                <i class="fas fa-star fa-sm text-warning"></i>
+                            </li>
+                            @endfor
+                            @for($i=$rating->score; $i<5; $i++)
+                                <li>
+                                <i class="far fa-star fa-sm text-warning"></i>
+                                </li>
+                                @endfor
+                    </ul>
+                </div>
+                @endforeach
+
+
+
+            </div>
+        </div>
 
         <div class="col-12 col-md-8 m-auto py-4" id="contacto">
             <form action="{{ route('create.contact') }}" method="post">
@@ -101,7 +136,7 @@
                     </div>
                     <div class="col-md-4 mb-2">
                         <label>Teléfono</label>
-                        <input class="form-control" type="number" min="600000000"  value="{{ old('phone') }}" name="phone">
+                        <input class="form-control" type="number" min="600000000" value="{{ old('phone') }}" name="phone">
                     </div>
                     <div class="col-md-12 mt-2">
                         <label>Mensaje</label>
@@ -119,4 +154,25 @@
 </div>
 
 
+@endsection
+
+@section('script')
+<script>
+    $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:false,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:2
+        },
+        1000:{
+            items:3
+        }
+    }
+})
+</script>
 @endsection
