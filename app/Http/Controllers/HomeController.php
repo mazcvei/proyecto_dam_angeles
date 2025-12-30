@@ -46,17 +46,18 @@ class HomeController extends Controller
 
         ]);
 
-        Contact::create([
+        $contact = Contact::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'message' => $request->message,
         ]);
+        
         Resend::emails()->send([
             'from' => 'Acme <onboarding@resend.dev>',
             'to' => 'angeles.trejo.croce@gmail.com',
             'subject' => 'Prueba contacto',
-            'html' => (new ContactEmail())->render(),
+            'html' => (new ContactEmail($contact))->render(),
         ]);
         return redirect()
             ->route('home')

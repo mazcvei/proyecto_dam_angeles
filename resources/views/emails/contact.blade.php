@@ -23,22 +23,21 @@
           <tr>
             <td style="padding:30px; color:#333333;">
               <h2 style="margin-top:0; font-size:20px;">
-                Hola,
+                Hola, {{ $contact->name }} ha creado una solicitud de contacto
               </h2>
 
-              <p style="font-size:16px; line-height:1.5;">
-                Este es el contenido principal del correo.
-              </p>
+               <label style="font-weight:bold">Teléfono:</label>
+              <span style="font-size:16px; line-height:1.5;">
+                {{$contact->phone}}
+              </span>
+              <br>
+              <br>
+              <label style="font-weight:bold">Mensaje:</label>
+              <br>
+              <span style="font-size:16px; line-height:1.5;">
+                {{$contact->message}}
+              </span>
 
-              <!-- Button -->
-           
-              <div style="text-align:center; margin:30px 0;">
-                <a href=""
-                   style="background-color:#2563eb; color:#ffffff; padding:12px 24px; text-decoration:none; border-radius:6px; font-size:16px; display:inline-block;">
-                 Ver mas
-                </a>
-              </div>
-            
 
               <p style="font-size:14px; color:#666666;">
                 Si no solicitaste este correo, puedes ignorarlo.

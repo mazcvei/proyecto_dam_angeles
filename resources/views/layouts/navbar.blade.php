@@ -41,6 +41,9 @@
                          <li class="nav-item">
                             <a class="nav-link" href="{{ route('services.index') }}">Servicios</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('contacts.index') }}">Contactos</a>
+                        </li>
                         @endif
                       
                         <li class="nav-item dropdown">

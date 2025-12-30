@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\StateEnum;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -59,16 +60,21 @@ Route::middleware('auth')->group(function () {
         Route::get('/descargar-imagenes/{order}', [OrderController::class, 'downloadImages'])->name('orders.download.images');
 
         //Services 
-        Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
-        Route::get('/crear-editar-service/{id?}', [ServiceController::class, 'edit'])->name('service.create.edit');
-        Route::post('/service-actualizar', [ServiceController::class, 'update'])->name(name: 'service.update');
-        Route::post('/service-crear', [ServiceController::class, 'store'])->name('service.store');
-        Route::get('/service-eliminar/{id}', [ServiceController::class, 'destroy'])->name('service.delete');
+        Route::get('/servicios', [ServiceController::class, 'index'])->name('services.index');
+        Route::get('/crear-editar-servicio/{id?}', [ServiceController::class, 'edit'])->name('service.create.edit');
+        Route::post('/servicio-actualizar', [ServiceController::class, 'update'])->name(name: 'service.update');
+        Route::post('/servicio-crear', [ServiceController::class, 'store'])->name('service.store');
+        Route::get('/servicio-eliminar/{id}', [ServiceController::class, 'destroy'])->name('service.delete');
 
         //Ratings
-        Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index');
-        Route::get('/ratings/{order}', [RatingController::class, 'ratingsOrder'])->name('ratings.order');
+        Route::get('/resenas', [RatingController::class, 'index'])->name('ratings.index');
+        Route::get('/resenas/{order}', [RatingController::class, 'ratingsOrder'])->name('ratings.order');
 
+        //Contacts
+        Route::get('/contactos', [ContactController::class, 'index'])->name('contacts.index');
+        Route::get('/contacto-eliminar/{contact}', [ContactController::class, 'destroy'])->name('contact.delete');
+
+        
 
     });
 });
