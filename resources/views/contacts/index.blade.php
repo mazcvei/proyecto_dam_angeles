@@ -40,7 +40,7 @@
                         <td class="w-25 cell_message">{{Str::limit($contact->message,100) }}</td>
                         <td>30-12-2025 18:52:00</td>
                         <td >
-                            <button class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#contactDetailModal" data-message="{{ $contact->message }}">
+                            <button class="btn btn-show" data-bs-toggle="modal" data-bs-target="#contactDetailModal" data-message="{{ $contact->message }}">
                                 <i class="fa-solid fa-eye"></i>
                             </button>
 
