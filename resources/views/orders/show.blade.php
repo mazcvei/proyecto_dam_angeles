@@ -9,6 +9,9 @@ use App\Enums\StateEnum;
     body {
         background-color: #f8f9fa !important;
     }
+    th{
+        text-align: start;
+    }
 
     .order-list>li,
     .total_price {
@@ -233,10 +236,11 @@ use App\Enums\StateEnum;
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Usuario</th>
-                        <th scope="col">Comentario</th>
-                        <th scope="col">Puntuación</th>
-                        <th scope="col">Fecha</th>
+                        <th>Usuario</th>
+                        <th>Comentario</th>
+                        <th>Tipo Ilustración</th>
+                        <th>Puntuación</th>
+                        <th>Fecha</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -245,6 +249,7 @@ use App\Enums\StateEnum;
                     <tr>
                         <td class="w-10">{{$rating->ratingUser->name}}</td>
                         <td class="text-start w-50">{{$rating->description}}</td>
+                        <td class="text-start w-25">{{$rating->illustrationType->type}}</td>
                         <td class="w-35">
                             @for($i=0; $i<$rating->score; $i++)
                                 <i class="fa-solid fa-star" style="color:orange"></i>

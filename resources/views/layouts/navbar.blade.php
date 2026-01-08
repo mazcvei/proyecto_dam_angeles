@@ -9,13 +9,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side -->
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('Acerca de') }}</a>
-                    </li>
-                </ul>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">            
 
                 <!-- Right Side -->
                 <ul class="navbar-nav ms-auto">

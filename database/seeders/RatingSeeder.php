@@ -25,6 +25,7 @@ class RatingSeeder extends Seeder
             Rating::create([
                 'user_id'=> $user->id,
                 'order_id'=> $order->id,
+                'illustration_type_id'=> $order->illustration_type_id,
                 'score' => rand(0,5),
                 'description' => 'Excelente servicio'
         ]);

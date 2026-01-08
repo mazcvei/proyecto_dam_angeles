@@ -10,10 +10,24 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ServiceController;
-
+use App\Mail\ContactEmail;
+use App\Models\Contact;
+use Resend\Laravel\Facades\Resend;
 
 Route::get('/testemail', function () {
-     
+        $contact = Contact::create([
+            'name' => "Mario",
+            'email' => "mario.azcvei@hotmail.com",
+            'phone' => "666666666",
+            'message' => "hola",
+        ]);
+        
+        Resend::emails()->send([
+            'from' => 'Acme <onboarding@resend.dev>',
+            'to' => 'mario.azcvei@hotmail.com',
+            'subject' => 'Prueba contacto',
+            'html' => (new ContactEmail($contact))->render(),
+        ]);
 
         echo 'envio ok';
 });

@@ -65,12 +65,6 @@
 
                 {{-- Acciones --}}
                 <div class="d-flex justify-content-between align-items-center">
-                    @if (Route::has('password.request'))
-                        <a href="{{ route('password.request') }}" class="text-decoration-none small text-muted">
-                            ¿Olvidaste la contraseña?
-                        </a>
-                    @endif
-
                     <button type="submit" class="btn btn-primary">
                         Entrar
                     </button>

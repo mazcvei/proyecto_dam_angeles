@@ -5,6 +5,10 @@
     .cell_message {
         text-align: start;
     }
+
+    #content_message {
+        overflow: auto;
+    }
 </style>
 <div class="container">
     <div class="row mt-4">
@@ -21,43 +25,43 @@
         <div class="col-12 col-md-12 m-auto">
             <div class="table-responsive">
                 <table class="table table-responsive caption-top" id="tablaContactos">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">Mensaje</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($contacts as $contact)
-                    <tr>
-                        <td>{{$contact->id}}</td>
-                        <td>{{$contact->name}}</td>
-                        <td>{{$contact->phone}}</td>
-                        <td class="w-25 cell_message">{{Str::limit($contact->message,100) }}</td>
-                        <td>30-12-2025 18:52:00</td>
-                        <td >
-                            <button class="btn btn-show" data-bs-toggle="modal" data-bs-target="#contactDetailModal" data-message="{{ $contact->message }}">
-                                <i class="fa-solid fa-eye"></i>
-                            </button>
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Mensaje</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($contacts as $contact)
+                        <tr>
+                            <td>{{$contact->id}}</td>
+                            <td>{{$contact->name}}</td>
+                            <td>{{$contact->phone}}</td>
+                            <td class="w-25 cell_message">{{Str::limit($contact->message,100) }}</td>
+                            <td>30-12-2025 18:52:00</td>
+                            <td>
+                                <button class="btn btn-show" data-bs-toggle="modal" data-bs-target="#contactDetailModal" data-message="{{ $contact->message }}">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
 
-                            @if(\App\Http\Helpers\UsersHelper::checkAdmin())
-                            <a class="btn btn-delete" onclick="return confirm('¿Quieres borrar este correo?')" href="{{ route('contact.delete',$contact->id) }}">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </a>
-                            @endif
+                                @if(\App\Http\Helpers\UsersHelper::checkAdmin())
+                                <a class="btn btn-delete" onclick="return confirm('¿Quieres borrar este correo?')" href="{{ route('contact.delete',$contact->id) }}">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                                @endif
 
-                        </td>
-                    </tr>
-                    @endforeach
+                            </td>
+                        </tr>
+                        @endforeach
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
             </div>
-            
+
             <div class="d-flex justify-content-center mb-4">
                 {{ $contacts->links() }}
             </div>
@@ -76,8 +80,8 @@
 
                 <p class="form-label mt-3" id="content_message">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                     Aliquid ducimus quas beatae laboriosam, ea harum repellat facere dicta. 
-                     Possimus dolore quam nisi natus, magnam ad porro ipsam minima quibusdam eum?
+                    Aliquid ducimus quas beatae laboriosam, ea harum repellat facere dicta.
+                    Possimus dolore quam nisi natus, magnam ad porro ipsam minima quibusdam eum?
                 </p>
 
             </div>
@@ -105,13 +109,14 @@
         paging: false
     });
     const buttons_show_message = document.getElementsByClassName("btn-show");
-    console.log(buttons_show_message);
-    for (let i = 0; i < buttons_show_message.length; i++) {
-        buttons_show_message[i].addEventListener("click", function () {
-            const message = this.getAttribute("data-message");
-            document.getElementById("content_message").innerText = message;
-        });
-    }
+    const text_message_show = document.getElementById("content_message")
     
+    for (elem of buttons_show_message) {
+        elem.addEventListener("click", function() {
+            const message = this.getAttribute("data-message");
+            text_message_show.textContent = message;
+        });
+
+    }
 </script>
 @endsection

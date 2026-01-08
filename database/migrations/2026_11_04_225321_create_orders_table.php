@@ -33,7 +33,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('paper_sizes')
                 ->onDelete('cascade');
-            $table->foreign('illustration_type_id')
+            $table->foreign(columns: 'illustration_type_id')
                 ->references('id')
                 ->on('illustration_types')
                 ->onDelete('cascade');

@@ -115,6 +115,14 @@ class UserController extends Controller
         }
 
     }
+
+    public function showFormRecoveryPwd()  {
+            return view('auth.reset-password');
+    }
+
+    public function showFormForgetPwd(){
+          return view('auth.forgot-password');
+    }
 }
 
 

@@ -49,7 +49,7 @@ class Order extends Model
 
     public function OrderRatings()
     {
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(Rating::class,'illustration_type_id','id');
     }
     public function hasUserRated($userId)
     {
