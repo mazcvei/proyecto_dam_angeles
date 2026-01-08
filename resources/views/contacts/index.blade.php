@@ -104,7 +104,14 @@
         },
         paging: false
     });
-
+    const buttons_show_message = document.getElementsByClassName("btn-show");
+    console.log(buttons_show_message);
+    for (let i = 0; i < buttons_show_message.length; i++) {
+        buttons_show_message[i].addEventListener("click", function () {
+            const message = this.getAttribute("data-message");
+            document.getElementById("content_message").innerText = message;
+        });
+    }
     
 </script>
 @endsection
