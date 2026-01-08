@@ -38,6 +38,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('contacts.index') }}">Contactos</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('setting.show') }}">Configuración</a>
+                        </li>
+                        
                         @endif
                       
                         <li class="nav-item dropdown">

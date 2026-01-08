@@ -13,6 +13,8 @@ use App\Http\Controllers\ServiceController;
 use App\Mail\ContactEmail;
 use App\Models\Contact;
 use Resend\Laravel\Facades\Resend;
+use App\Http\Controllers\SettingController;
+
 
 Route::get('/testemail', function () {
         $contact = Contact::create([
@@ -87,6 +89,12 @@ Route::middleware('auth')->group(function () {
         //Contacts
         Route::get('/contactos', [ContactController::class, 'index'])->name('contacts.index');
         Route::get('/contacto-eliminar/{contact}', [ContactController::class, 'destroy'])->name('contact.delete');
+        
+        //Settings
+        Route::get('/configuracion', [SettingController::class, 'show'])->name('setting.show');
+        Route::post('/configuracion', [SettingController::class, 'update'])->name('setting.update');
+
+
 
         
 
