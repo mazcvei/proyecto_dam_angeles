@@ -4,33 +4,61 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
-    public function show()  {
-            $settings = Setting::first();
-            return view('settings.vista_mostrar_formulario',compact('settings'));
+    public function show()
+    {
+        $settings = Setting::first();
+        return view('settings.create_edit', compact('settings'));
     }
 
-    public function update(Request $request)  {
-          $request->validate([
-            'description' => 'required|string',
+    public function update(Request $request)
+    {
+        //dd(count($request->file('images')));
+        $request->validate([
+            'description' => 'required|string|min:5|max:250',
             'email_contact' => 'required|email',
             'phone_contact' => 'required|string',
             'url_instagram' => 'nullable|url',
+            'images'        => 'nullable|array|max:10',
+            'images.*'      => 'nullable|mimes:jpeg,jpg,png|max:6250'
+        ], [
+            'url_instagram.url' => 'Debe tener un formato de URL válido.',
+            /*  'email_contact.required' => 'Debe tener un formato de URL válido.',
+           'email_contact.required' => 'Debe tener un formato de URL válido.',
+            'email_contact.required' => 'Debe tener un formato de URL válido.',
+            'email_contact.required' => 'Debe tener un formato de URL válido.', */
+            'description.required' => 'Debe tener un formato de URL válido.',
+            'description.string' => 'La descripción debe ser un texto.',
+            'description.min' => 'La descripción debe tener mínimo 5 caracteres.',
+            'description.max' => 'La descripción debe tener maximo 250 caracteres.',
+            'images.max' => 'Como maximo puedes subir 10 imágenes',
         ]);
 
-        $settings = Setting::first();
-        if (!$settings) {
-            $settings = new Setting();
+        $settings = Setting::firstOrCreate();
+
+        if (count($request->file('images')) > 0) {
+            $photos = [];
+            $files = Storage::disk('public')->files('carousel_images');
+            Storage::disk('public')->delete($files);
+
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('carousel_images', 'public');
+                array_push($photos, $path);
+            }
+            $settings->photos_carousel = json_encode($photos);
         }
 
         $settings->description = $request->description;
         $settings->email_contact = $request->email_contact;
         $settings->phone_contact = $request->phone_contact;
         $settings->url_instagram = $request->url_instagram;
+
         $settings->save();
 
-        return redirect()->route('setting.show')->with('success', 'Configuración guardada correctamente');
+        return redirect()->route('setting.show')
+            ->with('success', 'Configuración guardada correctamente');
     }
 }

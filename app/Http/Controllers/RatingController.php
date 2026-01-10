@@ -30,9 +30,8 @@ class RatingController extends Controller
             "score.max" => 'La puntuación máxima es 5',
             "description.required" => "El campo descripción es obligatorio",
             "description.string" => "El campo descripción es una cadena de texto",
-            "description.min" => "El campo descripción debe tener mínimo 3 caracteres",
+            "description.min" => "El campo descripción debe tener mínimo 3 caracteres"
         ]);
-
         $order = Order::findOrFail($request->order_id);
 
         // Seguridad: solo el dueño del pedido
@@ -48,6 +47,7 @@ class RatingController extends Controller
         Rating::create([
             "order_id" => $order->id,
             "user_id" => Auth::id(),
+            "illustration_type_id" => $order->illustration_type_id,
             "score" => $request->score,
             "description" => $request->description,
         ]);

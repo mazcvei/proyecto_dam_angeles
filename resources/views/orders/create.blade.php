@@ -388,8 +388,6 @@
             alert('Debes subir al menos una imagen!');
         }
 
-
-
         //  e.target.files
     })
 </script>

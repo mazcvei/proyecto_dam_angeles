@@ -114,6 +114,15 @@ use App\Enums\StateEnum;
             {{ session('success') }}
         </div>
         @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <!-- COLUMNA IZQUIERDA -->
         <div class="col-lg-6 mb-4 mb-lg-0 mt-4">
 

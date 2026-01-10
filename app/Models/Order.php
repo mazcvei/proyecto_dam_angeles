@@ -49,7 +49,8 @@ class Order extends Model
 
     public function OrderRatings()
     {
-        return $this->hasMany(Rating::class,'illustration_type_id','id');
+        return $this->hasMany(Rating::class,'illustration_type_id','id')
+        ->orderByDesc('created_at');
     }
     public function hasUserRated($userId)
     {
