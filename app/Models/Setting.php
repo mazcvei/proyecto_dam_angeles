@@ -18,4 +18,8 @@ class Setting extends Model
         'secondary_color',
         'auxiliar_color',
     ]; 
+
+    protected $casts = [
+        'photos_carousel' => 'array',
+    ];
 }

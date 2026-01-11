@@ -20,21 +20,24 @@ class SettingController extends Controller
         $request->validate([
             'description' => 'required|string|min:5|max:250',
             'email_contact' => 'required|email',
-            'phone_contact' => 'required|string',
+            'phone_contact' => 'required|regex:/^[67]\d{8}$/',
             'url_instagram' => 'nullable|url',
             'images'        => 'nullable|array|max:10',
             'images.*'      => 'nullable|mimes:jpeg,jpg,png|max:6250'
         ], [
             'url_instagram.url' => 'Debe tener un formato de URL válido.',
-            /*  'email_contact.required' => 'Debe tener un formato de URL válido.',
-           'email_contact.required' => 'Debe tener un formato de URL válido.',
-            'email_contact.required' => 'Debe tener un formato de URL válido.',
-            'email_contact.required' => 'Debe tener un formato de URL válido.', */
+            'email_contact.required'   => 'Debe escribir un email.',
+            'email_contact.email'   => 'Debe ser un email correcto.',
+            'phone_contact.required'   => 'Debe escribir un teléfono.',
+            'phone_contact.regex'   => 'el teléfono debe empezar por 6 o 7 y contener 9 dígitos.',
             'description.required' => 'Debe tener un formato de URL válido.',
             'description.string' => 'La descripción debe ser un texto.',
             'description.min' => 'La descripción debe tener mínimo 5 caracteres.',
             'description.max' => 'La descripción debe tener maximo 250 caracteres.',
+            'images.array'       => 'Debe añadir alguna imagen.',
             'images.max' => 'Como maximo puedes subir 10 imágenes',
+            'images.*.mimes'   => 'Extensión no válida.',
+
         ]);
 
         $settings = Setting::firstOrCreate();

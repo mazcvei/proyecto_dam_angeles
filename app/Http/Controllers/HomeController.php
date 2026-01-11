@@ -17,7 +17,8 @@ class HomeController extends Controller
     public function index(){
         $services = Service::limit(3)->get();
         $ratings = Rating::orderBy('score', 'desc')->limit(10)->get();
-        return view('home',compact('services','ratings'));  
+        $settings = Setting::first();
+        return view('home',compact('services','ratings','settings'));  
     }
 
     public function storeContact(Request $request)

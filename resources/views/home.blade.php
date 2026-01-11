@@ -42,11 +42,27 @@
             <h1>Algunos trabajos</h1>
             <div id="carouselMuestras" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                     
-                    <div class="carousel-item active">
-                        <img src="{{ asset('images/img1.jpg') }}" class="d-block w-100" alt="...">
-                    </div>
-                   
+
+                    @if($settings && is_array($settings->photos_carousel) && count($settings->photos_carousel) > 0)
+                        @foreach($settings->photos_carousel as $key => $photo)
+                            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                                <img
+                                    src="{{ asset('storage/' . $photo) }}"
+                                    class="d-block w-100"
+                                    alt="Imagen carrusel"
+                                >
+                            </div>
+                        @endforeach
+                    @else
+                        {{-- Imagen por defecto si no hay fotos --}}
+                        <div class="carousel-item active">
+                            <img
+                                src="{{ asset('images/img1.jpg') }}"
+                                class="d-block w-100"
+                                alt="Imagen por defecto"
+                            >
+                        </div>
+                    @endif
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselMuestras" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
