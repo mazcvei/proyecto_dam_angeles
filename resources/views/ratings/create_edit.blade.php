@@ -30,7 +30,10 @@
                     <label for="service" class="form-label">Descripción</label>
                     <textarea name="description" class="form-control" >{{ isset($service) ? $service->description : ''}}</textarea>
                 </div>
-                <button class="btn btn-submit" type="submit">Guardar</button>
+                 <div class="mb-3 text-center">
+                        <button class="btn btn-submit" type="submit">Guardar</button>
+                </div>
+               
            </form>
         </div>
     </div>

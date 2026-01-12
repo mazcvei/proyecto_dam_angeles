@@ -18,7 +18,8 @@ class HomeController extends Controller
         $services = Service::limit(3)->get();
         $ratings = Rating::orderBy('score', 'desc')->limit(10)->get();
         $settings = Setting::first();
-        return view('home',compact('services','ratings','settings'));  
+        $photos = json_decode($settings?->photos_carousel) ?? [];
+        return view('home',compact('services','ratings','settings','photos'));  
     }
 
     public function storeContact(Request $request)

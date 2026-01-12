@@ -1,68 +1,77 @@
-:root{
-    --color-principal: #96D9F8;
-    --color-secundario: #96A8F8;
-    --color-axuliar: #B596F8;
-    --color-error: #F598A1;
+:root {
+    --color-principal: #96d9f8;
+    --color-secundario: #96a8f8;
+    --color-axuliar: #b596f8;
+    --color-error: #f598a1;
     --color-axuliar-hover: #d7c6fd;
     --color-blanco: #fff;
 }
-.btn-primary{
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+.btn-primary {
     background-color: var(--color-axuliar);
     border: 1px solid var(--color-secundario);
 }
 
-nav{
+nav {
     background-color: var(--color-secundario);
     font-weight: bold;
 }
-.nav-link{
+.nav-link {
     color: var(--color-blanco);
 }
-h1{
+h1 {
     text-align: center;
 }
-th,td{
+th,
+td {
     text-align: center;
 }
-.alert{
+.alert {
     text-align: center;
     font-weight: bold;
 }
-.btn-edit,.btn-create{
+.btn-edit,
+.btn-create {
     background-color: var(--color-principal);
 }
-.btn-delete{
-     background-color: var(--color-error);
+.btn-delete {
+    background-color: var(--color-error);
 }
-.btn-submit{
-      background-color: var(--color-axuliar);
-      color: var(--color-blanco);
-      font-weight: 600;
+.btn-submit {
+    background-color: var(--color-axuliar);
+    color: var(--color-blanco);
+    font-weight: 600;
+    margin: auto;
 }
-.btn-submit:hover{
-     background-color: var(--color-axuliar-hover);
-     color: var(--color-blanco);
+.btn-submit:hover {
+    background-color: var(--color-axuliar-hover);
+    color: var(--color-blanco);
 }
-li{
+li {
     text-decoration: none;
     list-style: none;
 }
-ul{
+ul {
     margin-bottom: 0rem;
 }
-footer{
+footer {
     position: relative;
     bottom: 0;
     width: 100%;
 }
 
 footer a:hover {
-        opacity: 0.7;
-        transition: 0.3s;
-       
+    opacity: 0.7;
+    transition: 0.3s;
 }
-.carousel-control-prev-icon,.carousel-control-next-icon {
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
     background-color: black;
     padding: 1rem;
-    border-radius: 50%
+    border-radius: 50%;
+}
+.center{
+    text-align: center;
 }

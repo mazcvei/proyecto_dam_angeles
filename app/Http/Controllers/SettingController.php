@@ -41,8 +41,8 @@ class SettingController extends Controller
         ]);
 
         $settings = Setting::firstOrCreate();
-
-        if (count($request->file('images')) > 0) {
+        $images = $request->file('images');
+        if (is_array($images) && count($images) > 0) {
             $photos = [];
             $files = Storage::disk('public')->files('carousel_images');
             Storage::disk('public')->delete($files);

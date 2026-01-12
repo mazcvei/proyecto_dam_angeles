@@ -26,7 +26,10 @@
                     <label for="rol" class="form-label">Rol</label>
                     <input type="text" name="rol" class="form-control" id="rol" value="{{ isset($rol) ? $rol->rol : '' }}">
                 </div>
-                <button class="btn btn-submit" type="submit">Guardar</button>
+                 <div class="mb-3 text-center">
+                        <button class="btn btn-submit" type="submit">Guardar</button>
+                </div>
+  
            </form>
         </div>
     </div>

@@ -37,31 +37,20 @@
             {{ session('success') }}
         </div>
         @endif
-
         <div class="col-12 py-4" id="carrusel">
             <h1>Algunos trabajos</h1>
             <div id="carouselMuestras" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
 
-                    @if($settings && is_array($settings->photos_carousel) && count($settings->photos_carousel) > 0)
-                        @foreach($settings->photos_carousel as $key => $photo)
-                            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                                <img
-                                    src="{{ asset('storage/' . $photo) }}"
-                                    class="d-block w-100"
-                                    alt="Imagen carrusel"
-                                >
-                            </div>
-                        @endforeach
-                    @else
-                        {{-- Imagen por defecto si no hay fotos --}}
-                        <div class="carousel-item active">
+                    @if(count($photos) > 0)
+                        @foreach($photos as $photo)
+                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                             <img
-                                src="{{ asset('images/img1.jpg') }}"
+                                src="{{ asset('storage/' . $photo) }}"
                                 class="d-block w-100"
-                                alt="Imagen por defecto"
-                            >
+                                alt="Imagen carrusel">
                         </div>
+                        @endforeach
                     @endif
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselMuestras" data-bs-slide="prev">
@@ -168,20 +157,20 @@
 @section('script')
 <script>
     $('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:false,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:2
-        },
-        1000:{
-            items:3
+        loop: true,
+        margin: 10,
+        nav: false,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            1000: {
+                items: 3
+            }
         }
-    }
-})
+    })
 </script>
 @endsection

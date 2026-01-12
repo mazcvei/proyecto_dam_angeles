@@ -37,7 +37,7 @@
                         @endforeach
                     </select>
                 </div>
-               
+         
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
                     <input type="text" name="name" required class="form-control" id="name" value="{{ isset($user) ? $user->name : '' }}">
@@ -54,7 +54,10 @@
                     <label for="password_confirmation" class="form-label">Confrimar Contraseña</label>
                     <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" value="">
                 </div>
-                <button class="btn btn-submit" type="submit">Guardar</button>
+                <div class="mb-3 center">
+                     <button class="btn btn-submit" type="submit">Guardar</button>
+                </div>
+               
            </form>
         </div>
     </div>
