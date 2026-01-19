@@ -59,7 +59,8 @@
                             @php
 
                                 $isDelivered = $order->OrderState->state === \App\Enums\StateEnum::ENTREGADO->value;
-                                $hasRated = $order->hasUserRated(auth()->id());
+                                $hasRated = \App\Models\Rating::where('order_id',$order->id)->first();
+
                             @endphp
 
                             @if($isDelivered && !$hasRated && !\App\Http\Helpers\UsersHelper::checkAdmin())

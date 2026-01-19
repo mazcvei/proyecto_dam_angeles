@@ -45,6 +45,8 @@ Route::middleware('auth')->group(function () {
 
     //Profile
     Route::get('/perfil', [UserController::class, 'show'])->name('user.show');
+    Route::post('/usuarios-actualizar', [UserController::class, 'update'])->name(name: 'user.update');
+
 
     //Orders
     Route::get('/mis-pedidos', [OrderController::class, 'myOrders'])->name('my.orders');
@@ -57,7 +59,6 @@ Route::middleware('auth')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::get('/usuarios', [UserController::class, 'index'])->name('user.index');
         Route::get('/crear-editar-usuarios/{id?}', [UserController::class, 'edit'])->name('user.create.edit');
-        Route::post('/usuarios-actualizar', [UserController::class, 'update'])->name(name: 'user.update');
         Route::post('/usuarios-crear', [UserController::class, 'store'])->name('user.store');
         Route::get('/usuarios-eliminar/{id}', [UserController::class, 'destroy'])->name('user.delete');
 

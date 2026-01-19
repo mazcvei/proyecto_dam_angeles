@@ -125,8 +125,11 @@
     .carousel-item img {
         border-radius: 5px;
         max-height: 60vh;
-        object-fit: cover;
+        object-fit: contain;
         object-position: center;
+        background-color: antiquewhite;
+        border-radius: 5px;
+        border: 1px solid grey
     }
 
     .btn-upload {

@@ -18,7 +18,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('created_at', 'desc')->paginate(20);
-        //dd($users);
         return view('users.index',compact('users'));
     }
 
@@ -33,7 +32,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
         ]);
-
+        
         User::create([
             'rol_id' => $request->rol_id,
             'name' => $request->name,
@@ -79,8 +78,9 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = User::find($request->id);
+       
         $request->validate([
-            'rol_id' => 'required|exists:roles,id',
+            'rol_id' => 'nullable|exists:roles,id',
             'name' => 'required|max:250',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:6|confirmed',

@@ -40,7 +40,7 @@ class RatingController extends Controller
         }
 
         // Evitar doble valoración
-        if ($order->OrderRatings()->where('user_id', Auth::id())->exists()) {
+        if (Rating::where('order_id',$order->id)->where('user_id',auth()->id())->first()) {
             return back()->with('success', 'Ya has valorado este pedido.');
         }
 

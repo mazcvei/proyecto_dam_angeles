@@ -36,14 +36,14 @@
 
                 {{-- Password --}}
                 <div class="mb-3">
-                    <label for="password" class="form-label">{{ __('Password') }}</label>
+                    <label for="password" class="form-label">Contraseña</label>
                     <input
                         id="password"
                         type="password"
                         name="password"
                         class="form-control @error('password') is-invalid @enderror"
                         required
-                        autocomplete="current-password"
+                        autocomplete="new-password"
                     >
                     @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -65,7 +65,7 @@
 
                 {{-- Acciones --}}
                 <div class="d-flex justify-content-between align-items-center">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary m-auto">
                         Entrar
                     </button>
                 </div>
